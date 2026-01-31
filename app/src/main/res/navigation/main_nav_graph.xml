@@ -15,4 +15,14 @@
         android:name="com.example.mealplanner.LunchScreen"
         android:label="fragment_lunch_screen"
         tools:layout="@layout/fragment_lunch_screen" />
+    <fragment
+        android:id="@+id/logInScreen"
+        android:name="com.example.mealplanner.LogInScreen"
+        android:label="fragment_log_in_screen"
+        tools:layout="@layout/fragment_log_in_screen" />
+    <fragment
+        android:id="@+id/signupScreen"
+        android:name="com.example.mealplanner.SignupScreen"
+        android:label="fragment_signup_screen"
+        tools:layout="@layout/fragment_signup_screen" />
 </navigation>

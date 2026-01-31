@@ -5,4 +5,7 @@
     <string name="log_in">Log In</string>
     <string name="sign_up">Sign Up</string>
     <string name="login_message">Get excited! Start preparing your meals for the days ahead.</string>
+    <string name="email_or_mobile">Email or Mobile Number</string>
+    <string name="or_log_in_with">or log in with</string>
+    <string name="or_sign_up_with">or sign up with</string>
 </resources>
