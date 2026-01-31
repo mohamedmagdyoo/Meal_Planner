@@ -3,26 +3,54 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/lunchScreen">
+    app:startDestination="@id/welcomeScreen">
 
     <fragment
         android:id="@+id/homeScreen"
         android:name="com.example.mealplanner.HomeScreen"
         android:label="fragment_home_screen"
-        tools:layout="@layout/fragment_home_screen" />
+        tools:layout="@layout/fragment_home_screen" >
+        <argument
+            android:name="number"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/lunchScreen"
         android:name="com.example.mealplanner.LunchScreen"
         android:label="fragment_lunch_screen"
-        tools:layout="@layout/fragment_lunch_screen" />
+        tools:layout="@layout/fragment_lunch_screen" >
+        <action
+            android:id="@+id/action_lunchScreen_to_logInScreen"
+            app:destination="@id/logInScreen" />
+        <action
+            android:id="@+id/action_lunchScreen_to_signupScreen"
+            app:destination="@id/signupScreen" />
+    </fragment>
     <fragment
         android:id="@+id/logInScreen"
         android:name="com.example.mealplanner.LogInScreen"
         android:label="fragment_log_in_screen"
-        tools:layout="@layout/fragment_log_in_screen" />
+        tools:layout="@layout/fragment_log_in_screen" >
+        <action
+            android:id="@+id/action_logInScreen_to_welcomeScreen"
+            app:destination="@id/welcomeScreen" />
+    </fragment>
     <fragment
         android:id="@+id/signupScreen"
         android:name="com.example.mealplanner.SignupScreen"
         android:label="fragment_signup_screen"
-        tools:layout="@layout/fragment_signup_screen" />
+        tools:layout="@layout/fragment_signup_screen" >
+        <action
+            android:id="@+id/action_signupScreen_to_welcomeScreen"
+            app:destination="@id/welcomeScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcomeScreen"
+        android:name="com.example.mealplanner.WelcomeScreen"
+        android:label="fragment_welcome_screen"
+        tools:layout="@layout/fragment_welcome_screen" >
+        <action
+            android:id="@+id/action_welcomeScreen_to_homeScreen"
+            app:destination="@id/homeScreen" />
+    </fragment>
 </navigation>
