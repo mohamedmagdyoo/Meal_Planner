@@ -45,4 +45,5 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation(libs.lottie)
+    implementation("androidx.core:core-splashscreen:1.0.1")
 }

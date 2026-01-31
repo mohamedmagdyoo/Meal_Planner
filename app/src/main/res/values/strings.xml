@@ -2,4 +2,7 @@
     <string name="app_name">Meal Planner</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="log_in">Log In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="login_message">Get excited! Start preparing your meals for the days ahead.</string>
 </resources>
