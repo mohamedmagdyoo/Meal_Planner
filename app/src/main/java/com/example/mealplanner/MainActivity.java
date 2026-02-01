@@ -1,55 +1,103 @@
 package com.example.mealplanner;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
 import androidx.core.splashscreen.SplashScreen;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
-import com.airbnb.lottie.LottieAnimationView;
+import com.example.mealplanner.databinding.ActivityMainBinding;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ActivityMainBinding binding;
     SplashScreen splashScreen;
-    LottieAnimationView lottieView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        splashScreen  = SplashScreen.installSplashScreen(this);
 
+        splashScreen = SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
 
-        lottieView= findViewById(R.id.lottie_splash);
-        lottieView.setMaxProgress(0.4f);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
+        NavHostFragment navHostFragment =
+                (NavHostFragment) getSupportFragmentManager()
+                        .findFragmentById(R.id.fragmentContainerView);
 
-        lottieView.addAnimatorListener(new Animator.AnimatorListener() {
+        NavController navController = navHostFragment.getNavController();
+
+        NavigationUI.setupWithNavController(
+                binding.bottomNavigationView,
+                navController
+        );
+
+        handleBottomNavBar(navController);
+
+        binding.lottieSplash.addAnimatorListener(new AnimatorListenerAdapter() {
             @Override
-            public void onAnimationCancel(@NonNull Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(@NonNull Animator animation) {
-                lottieView.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onAnimationRepeat(@NonNull Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationStart(@NonNull Animator animation) {
-
+            public void onAnimationEnd(Animator animation) {
+                binding.lottieSplash.setVisibility(View.GONE);
             }
         });
     }
+
+    private void handleBottomNavBar(NavController navController) {
+        Set<Integer> topLevelDestinations = new HashSet<>();
+        topLevelDestinations.add(R.id.homeScreen);
+        topLevelDestinations.add(R.id.searchFragment);
+        topLevelDestinations.add(R.id.calendarFragment);
+        topLevelDestinations.add(R.id.favoriteFragment);
+        topLevelDestinations.add(R.id.profileFragment);
+
+        navController.addOnDestinationChangedListener((controller, destination, args) -> {
+            binding.bottomNavigationView.setVisibility(
+                    topLevelDestinations.contains(destination.getId())
+                            ? View.VISIBLE
+                            : View.GONE
+            );
+        });
+    }
 }
+
+
+//    @NonNull
+//    private NavController setupNavigation() {
+//
+//        NavController navController =
+//                Navigation.findNavController(this, R.id.fragmentContainerView);
+//
+//        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+//            if (navController.getCurrentDestination() != null &&
+//                    item.getItemId() == navController.getCurrentDestination().getId()) {
+//                return false;
+//            }
+//            NavOptions options = new NavOptions.Builder()
+//                    .setLaunchSingleTop(true)
+//                    .setRestoreState(true)
+//                    .setPopUpTo(R.id.homeScreen, false, true)
+//                    .build();
+//
+//            try {
+//                navController.navigate(item.getItemId(), null, options);
+//                return true;
+//            } catch (Exception e) {
+//                return NavigationUI.onNavDestinationSelected(item, navController);
+//            }
+//        });
+//
+//        return navController;
+//    }
