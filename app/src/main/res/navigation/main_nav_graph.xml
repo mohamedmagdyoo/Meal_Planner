@@ -6,15 +6,6 @@
     app:startDestination="@id/welcomeScreen">
 
     <fragment
-        android:id="@+id/homeScreen"
-        android:name="com.example.mealplanner.HomeScreen"
-        android:label="fragment_home_screen"
-        tools:layout="@layout/fragment_home_screen" >
-        <argument
-            android:name="number"
-            app:argType="integer" />
-    </fragment>
-    <fragment
         android:id="@+id/lunchScreen"
         android:name="com.example.mealplanner.LunchScreen"
         android:label="fragment_lunch_screen"
@@ -50,7 +41,8 @@
         android:label="fragment_welcome_screen"
         tools:layout="@layout/fragment_welcome_screen" >
         <action
-            android:id="@+id/action_welcomeScreen_to_homeScreen"
-            app:destination="@id/homeScreen" />
+            android:id="@+id/action_welcomeScreen_to_bottom_nav_graph"
+            app:destination="@id/bottom_nav_graph" />
     </fragment>
+    <include app:graph="@navigation/bottom_nav_graph" />
 </navigation>

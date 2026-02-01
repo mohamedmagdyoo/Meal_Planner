@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         lottieView= findViewById(R.id.lottie_splash);
+        lottieView.setMaxProgress(0.4f);
+
 
         lottieView.addAnimatorListener(new Animator.AnimatorListener() {
             @Override

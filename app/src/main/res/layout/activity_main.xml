@@ -28,9 +28,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/orange_base"
+        app:lottie_enableMergePathsForKitKatAndAbove="true"
         app:lottie_autoPlay="true"
+
+        app:lottie_speed="1.5"
         app:lottie_loop="false"
-        app:lottie_rawRes="@raw/food_line" />
+        app:lottie_rawRes="@raw/food_loading" />
 
 
 

@@ -35,13 +35,12 @@ public class WelcomeScreen extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        direction = WelcomeScreenDirections.actionWelcomeScreenToHomeScreen(22);
         navHomeScreenBtn = view.findViewById(R.id.nav_home_screen_btn);
         controller = NavHostFragment.findNavController(this);
 
 
         navHomeScreenBtn.setOnClickListener((v -> {
-            direction = WelcomeScreenDirections.actionWelcomeScreenToHomeScreen(22);
+            direction = WelcomeScreenDirections.actionWelcomeScreenToBottomNavGraph();
 
             controller.navigate(direction);
         }));
