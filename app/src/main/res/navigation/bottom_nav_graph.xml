@@ -6,27 +6,27 @@
     app:startDestination="@id/homeScreen">
     <fragment
         android:id="@+id/homeScreen"
-        android:name="com.example.mealplanner.HomeScreen"
+        android:name="com.example.mealplanner.presentation.homescreen.HomeScreen"
         android:label="fragment_home_screen"
         tools:layout="@layout/fragment_home_screen"/>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.mealplanner.SearchFragment"
+        android:name="com.example.mealplanner.presentation.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.example.mealplanner.FavoriteFragment"
+        android:name="com.example.mealplanner.presentation.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.example.mealplanner.CalendarFragment"
+        android:name="com.example.mealplanner.presentation.CalendarFragment"
         android:label="fragment_calendar"
         tools:layout="@layout/fragment_calendar" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.mealplanner.ProfileFragment"
+        android:name="com.example.mealplanner.presentation.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 

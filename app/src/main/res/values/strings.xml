@@ -8,4 +8,6 @@
     <string name="email_or_mobile">Email or Mobile Number</string>
     <string name="or_log_in_with">or log in with</string>
     <string name="or_sign_up_with">or sign up with</string>
+    <string name="lazy_meals_for_a_cozy_day">Lazy meals for a cozy day:</string>
+    <string name="today_s_suggested_meal">Today\'s suggested meal:</string>
 </resources>

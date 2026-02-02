@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/lunchScreen"
-        android:name="com.example.mealplanner.LunchScreen"
+        android:name="com.example.mealplanner.presentation.LunchScreen"
         android:label="fragment_lunch_screen"
         tools:layout="@layout/fragment_lunch_screen" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/logInScreen"
-        android:name="com.example.mealplanner.LogInScreen"
+        android:name="com.example.mealplanner.presentation.LogInScreen"
         android:label="fragment_log_in_screen"
         tools:layout="@layout/fragment_log_in_screen" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/signupScreen"
-        android:name="com.example.mealplanner.SignupScreen"
+        android:name="com.example.mealplanner.presentation.SignupScreen"
         android:label="fragment_signup_screen"
         tools:layout="@layout/fragment_signup_screen" >
         <action
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/welcomeScreen"
-        android:name="com.example.mealplanner.WelcomeScreen"
+        android:name="com.example.mealplanner.presentation.WelcomeScreen"
         android:label="fragment_welcome_screen"
         tools:layout="@layout/fragment_welcome_screen" >
         <action

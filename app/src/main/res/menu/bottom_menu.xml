@@ -3,29 +3,29 @@
     <item
         android:id="@+id/homeScreen"
         android:title="Home"
-        android:icon="@drawable/google_icon"
+        android:icon="@drawable/home_vec"
         />
 
     <item
         android:id="@+id/searchFragment"
         android:title="Search"
-        android:icon="@drawable/google_icon"
+        android:icon="@drawable/search_vec"
         />
 
     <item
         android:id="@+id/favoriteFragment"
         android:title="Favorite"
-        android:icon="@drawable/google_icon"
+        android:icon="@drawable/love_vec"
         />
     <item
         android:id="@+id/calendarFragment"
         android:title="Calendar"
-        android:icon="@drawable/google_icon"
+        android:icon="@drawable/calendar_vec"
         />
 
     <item android:id="@id/profileFragment"
         android:title="Profile"
-        android:icon="@drawable/google_icon"/>
+        android:icon="@drawable/user_vec"/>
 
 </menu>
 

@@ -17,24 +17,30 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.mealplanner.databinding.ActivityMainBinding;
 
+
 import java.util.HashSet;
 import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    SplashScreen splashScreen;
+    private NavHostFragment navHostFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        splashScreen = SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        NavHostFragment navHostFragment =
+        //Lottie
+        binding.lottieSplash.setProgress(0.5f);
+        binding.lottieSplash.setSpeed(105f);
+        binding.lottieSplash.playAnimation();
+
+
+        navHostFragment =
                 (NavHostFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.fragmentContainerView);
 
@@ -68,36 +74,8 @@ public class MainActivity extends AppCompatActivity {
                     topLevelDestinations.contains(destination.getId())
                             ? View.VISIBLE
                             : View.GONE
+
             );
         });
     }
 }
-
-
-//    @NonNull
-//    private NavController setupNavigation() {
-//
-//        NavController navController =
-//                Navigation.findNavController(this, R.id.fragmentContainerView);
-//
-//        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-//            if (navController.getCurrentDestination() != null &&
-//                    item.getItemId() == navController.getCurrentDestination().getId()) {
-//                return false;
-//            }
-//            NavOptions options = new NavOptions.Builder()
-//                    .setLaunchSingleTop(true)
-//                    .setRestoreState(true)
-//                    .setPopUpTo(R.id.homeScreen, false, true)
-//                    .build();
-//
-//            try {
-//                navController.navigate(item.getItemId(), null, options);
-//                return true;
-//            } catch (Exception e) {
-//                return NavigationUI.onNavDestinationSelected(item, navController);
-//            }
-//        });
-//
-//        return navController;
-//    }
