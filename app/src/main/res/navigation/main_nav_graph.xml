@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/welcomeScreen">
+
+    <fragment
+        android:id="@+id/lunchScreen"
+        android:name="com.example.mealplanner.presentation.LunchScreen"
+        android:label="fragment_lunch_screen"
+        tools:layout="@layout/fragment_lunch_screen" >
+        <action
+            android:id="@+id/action_lunchScreen_to_logInScreen"
+            app:destination="@id/logInScreen" />
+        <action
+            android:id="@+id/action_lunchScreen_to_signupScreen"
+            app:destination="@id/signupScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/logInScreen"
+        android:name="com.example.mealplanner.presentation.LogInScreen"
+        android:label="fragment_log_in_screen"
+        tools:layout="@layout/fragment_log_in_screen" >
+        <action
+            android:id="@+id/action_logInScreen_to_welcomeScreen"
+            app:destination="@id/welcomeScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/signupScreen"
+        android:name="com.example.mealplanner.presentation.SignupScreen"
+        android:label="fragment_signup_screen"
+        tools:layout="@layout/fragment_signup_screen" >
+        <action
+            android:id="@+id/action_signupScreen_to_welcomeScreen"
+            app:destination="@id/welcomeScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/welcomeScreen"
+        android:name="com.example.mealplanner.presentation.WelcomeScreen"
+        android:label="fragment_welcome_screen"
+        tools:layout="@layout/fragment_welcome_screen" >
+        <action
+            android:id="@+id/action_welcomeScreen_to_bottom_nav_graph"
+            app:destination="@id/bottom_nav_graph" />
+    </fragment>
+    <include app:graph="@navigation/bottom_nav_graph" />
+</navigation>
