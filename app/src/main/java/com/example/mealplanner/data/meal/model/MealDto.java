@@ -1,8 +1,13 @@
 package com.example.mealplanner.data.meal.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
-public class MealDto {
+public class MealDto implements Parcelable {
 
     @SerializedName("idMeal")
     private String mealId;
@@ -113,6 +118,69 @@ public class MealDto {
         this.strMeasure19 = strMeasure19;
         this.strMeasure20 = strMeasure20;
     }
+
+    protected MealDto(Parcel in) {
+        mealId = in.readString();
+        mealName = in.readString();
+        strMealAlternate = in.readString();
+        category = in.readString();
+        area = in.readString();
+        instructions = in.readString();
+        mealImage = in.readString();
+        youtubeURL = in.readString();
+        strIngredient1 = in.readString();
+        strIngredient2 = in.readString();
+        strIngredient3 = in.readString();
+        strIngredient4 = in.readString();
+        strIngredient5 = in.readString();
+        strIngredient6 = in.readString();
+        strIngredient7 = in.readString();
+        strIngredient8 = in.readString();
+        strIngredient9 = in.readString();
+        strIngredient10 = in.readString();
+        strIngredient11 = in.readString();
+        strIngredient12 = in.readString();
+        strIngredient13 = in.readString();
+        strIngredient14 = in.readString();
+        strIngredient15 = in.readString();
+        strIngredient16 = in.readString();
+        strIngredient17 = in.readString();
+        strIngredient18 = in.readString();
+        strIngredient19 = in.readString();
+        strIngredient20 = in.readString();
+        strMeasure1 = in.readString();
+        strMeasure2 = in.readString();
+        strMeasure3 = in.readString();
+        strMeasure4 = in.readString();
+        strMeasure5 = in.readString();
+        strMeasure6 = in.readString();
+        strMeasure7 = in.readString();
+        strMeasure8 = in.readString();
+        strMeasure9 = in.readString();
+        strMeasure10 = in.readString();
+        strMeasure11 = in.readString();
+        strMeasure12 = in.readString();
+        strMeasure13 = in.readString();
+        strMeasure14 = in.readString();
+        strMeasure15 = in.readString();
+        strMeasure16 = in.readString();
+        strMeasure17 = in.readString();
+        strMeasure18 = in.readString();
+        strMeasure19 = in.readString();
+        strMeasure20 = in.readString();
+    }
+
+    public static final Creator<MealDto> CREATOR = new Creator<MealDto>() {
+        @Override
+        public MealDto createFromParcel(Parcel in) {
+            return new MealDto(in);
+        }
+
+        @Override
+        public MealDto[] newArray(int size) {
+            return new MealDto[size];
+        }
+    };
 
     public String getMealId() {
         return mealId;
@@ -496,6 +564,63 @@ public class MealDto {
 
     public void setStrMeasure20(String strMeasure20) {
         this.strMeasure20 = strMeasure20;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(mealId);
+        dest.writeString(mealName);
+        dest.writeString(strMealAlternate);
+        dest.writeString(category);
+        dest.writeString(area);
+        dest.writeString(instructions);
+        dest.writeString(mealImage);
+        dest.writeString(youtubeURL);
+        dest.writeString(strIngredient1);
+        dest.writeString(strIngredient2);
+        dest.writeString(strIngredient3);
+        dest.writeString(strIngredient4);
+        dest.writeString(strIngredient5);
+        dest.writeString(strIngredient6);
+        dest.writeString(strIngredient7);
+        dest.writeString(strIngredient8);
+        dest.writeString(strIngredient9);
+        dest.writeString(strIngredient10);
+        dest.writeString(strIngredient11);
+        dest.writeString(strIngredient12);
+        dest.writeString(strIngredient13);
+        dest.writeString(strIngredient14);
+        dest.writeString(strIngredient15);
+        dest.writeString(strIngredient16);
+        dest.writeString(strIngredient17);
+        dest.writeString(strIngredient18);
+        dest.writeString(strIngredient19);
+        dest.writeString(strIngredient20);
+        dest.writeString(strMeasure1);
+        dest.writeString(strMeasure2);
+        dest.writeString(strMeasure3);
+        dest.writeString(strMeasure4);
+        dest.writeString(strMeasure5);
+        dest.writeString(strMeasure6);
+        dest.writeString(strMeasure7);
+        dest.writeString(strMeasure8);
+        dest.writeString(strMeasure9);
+        dest.writeString(strMeasure10);
+        dest.writeString(strMeasure11);
+        dest.writeString(strMeasure12);
+        dest.writeString(strMeasure13);
+        dest.writeString(strMeasure14);
+        dest.writeString(strMeasure15);
+        dest.writeString(strMeasure16);
+        dest.writeString(strMeasure17);
+        dest.writeString(strMeasure18);
+        dest.writeString(strMeasure19);
+        dest.writeString(strMeasure20);
     }
 }
 

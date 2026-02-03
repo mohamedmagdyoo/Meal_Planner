@@ -6,6 +6,7 @@ plugins {
 
 android {
 
+
     buildFeatures {
         viewBinding = true
     }
@@ -39,6 +40,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
 }
 
 
@@ -64,5 +66,11 @@ dependencies {
     implementation(libs.rxandroid)
     implementation(libs.rxjava3.retrofit.adapter)
 
+    //noinspection NewerVersionAvailable
+    implementation(libs.core)
 
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.exoplayer.dash)
+    implementation(libs.androidx.media3.ui)
+    implementation(libs.androidx.media3.ui.compose)
 }

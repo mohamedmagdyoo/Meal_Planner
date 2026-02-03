@@ -18,6 +18,11 @@ import java.util.List;
 public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MealViewHolder> {
 
     private List<MealDto> data;
+    private OnClickOnMealItem event;
+
+    public MealAdapter(HomeScreen view){
+        event = view;
+    }
 
     @NonNull
     @Override
@@ -31,6 +36,10 @@ public class MealAdapter extends RecyclerView.Adapter<MealAdapter.MealViewHolder
     @Override
     public void onBindViewHolder(@NonNull MealViewHolder holder, int position) {
         holder.bind(data.get(position));
+
+        holder.itemView.setOnClickListener(v -> {
+            event.clickedOnMealItem(data.get(position));
+        });
     }
 
     public void setData(List<MealDto> data) {

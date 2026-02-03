@@ -5,6 +5,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,7 +31,7 @@ import com.example.mealplanner.presentation.homescreen.prsenter.HomePresenterIMP
 
 import java.util.List;
 
-public class HomeScreen extends Fragment implements MealView {
+public class HomeScreen extends Fragment implements MealView ,OnClickOnMealItem {
 
     private RecyclerView recyclerView;
     private MealAdapter adapter;
@@ -35,6 +39,8 @@ public class HomeScreen extends Fragment implements MealView {
     private ImageView suggestedMealImage;
     private TextView suggestedMealName;
     private HomePresenterIMP presenter;
+    private NavDirections directions;
+    private NavController controller;
 
 
     @Override
@@ -53,7 +59,7 @@ public class HomeScreen extends Fragment implements MealView {
         suggestedMealName = view.findViewById(R.id.suggested_meal_name);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
-        adapter = new MealAdapter();
+        adapter = new MealAdapter(this);
         recyclerView.setAdapter(adapter);
 
         presenter = new HomePresenterIMP(this);
@@ -77,6 +83,15 @@ public class HomeScreen extends Fragment implements MealView {
                 .into(suggestedMealImage);
 
         suggestedMealName.setText(randomMeal.getMealName());
+
+    }
+
+    @Override
+    public void clickedOnMealItem(MealDto meal) {
+        directions = HomeScreenDirections.actionHomeScreenToMealDetailsScreen(meal);
+        Log.d("asd -->", "clickedOnMealItem: " + meal.getMealName());
+        controller = NavHostFragment.findNavController(this);
+        controller.navigate(directions);
 
     }
 }
