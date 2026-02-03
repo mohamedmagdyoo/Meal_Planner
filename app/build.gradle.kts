@@ -60,5 +60,9 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.glide)
+    implementation(libs.rxjava)
+    implementation(libs.rxandroid)
+    implementation(libs.rxjava3.retrofit.adapter)
+
 
 }

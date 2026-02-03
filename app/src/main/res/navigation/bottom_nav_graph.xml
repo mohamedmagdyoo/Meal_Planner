@@ -29,6 +29,11 @@
         android:name="com.example.mealplanner.presentation.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/mealDetailsScreen"
+        android:name="com.example.mealplanner.MealDetailsScreen"
+        android:label="fragment_meal_details_screen"
+        tools:layout="@layout/fragment_meal_details_screen" />
 
 
 </navigation>
