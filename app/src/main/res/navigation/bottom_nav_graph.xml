@@ -6,7 +6,7 @@
     app:startDestination="@id/homeScreen">
     <fragment
         android:id="@+id/homeScreen"
-        android:name="com.example.mealplanner.presentation.homescreen.HomeScreen"
+        android:name="com.example.mealplanner.presentation.homescreen.view.HomeScreen"
         android:label="fragment_home_screen"
         tools:layout="@layout/fragment_home_screen"/>
     <fragment

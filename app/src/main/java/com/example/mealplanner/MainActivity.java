@@ -5,13 +5,8 @@ import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.splashscreen.SplashScreen;
 import androidx.navigation.NavController;
-import androidx.navigation.NavOptions;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
@@ -26,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     private NavHostFragment navHostFragment;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -34,11 +30,11 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+
         //Lottie
         binding.lottieSplash.setProgress(0.5f);
         binding.lottieSplash.setSpeed(105f);
         binding.lottieSplash.playAnimation();
-
 
         navHostFragment =
                 (NavHostFragment) getSupportFragmentManager()
