@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.mealplanner.R;
@@ -52,12 +53,15 @@ public class MealDetailsScreen extends Fragment implements MealDetailsView {
         mealDto = MealDetailsScreenArgs.fromBundle(getArguments()).getMealDetails();
         Log.d("asd -->", "onViewCreated: " + mealDto.getMealImage());
 
-        Glide.with(requireContext())
+        Glide.with(this)
                 .load(mealDto.getMealImage())
                 .centerCrop()
                 .placeholder(R.drawable.meal_icon)
                 .into(binding.imageMealDetails);
 
+        binding.nestedScrollViewDetails.post(()->{
+            binding.nestedScrollViewDetails.scrollTo(0,0);
+        });
         binding.mealNameMDetails.setText(mealDto.getMealName());
         binding.typeMealNameDetails.setText(mealDto.getCategory());
         binding.countryMealNameDetails.setText(mealDto.getArea());
@@ -65,9 +69,13 @@ public class MealDetailsScreen extends Fragment implements MealDetailsView {
         adapter = new MealsAdapter();
         binding.recyclerViewIngredientsDetails.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         binding.recyclerViewIngredientsDetails.setAdapter(adapter);
-        presenterIMP = new MealDetailsPresenterIMP(this);
+        presenterIMP = new MealDetailsPresenterIMP(this,requireContext().getApplicationContext());
 
         presenterIMP.getMealIngredients(mealDto);
+
+        binding.addToFavMeals.setOnClickListener(v->{
+            presenterIMP.addToFavMeals(mealDto);
+        });
 
         //        getLifecycle().addObserver(binding.videoView);
 //        binding.videoView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
@@ -85,5 +93,10 @@ public class MealDetailsScreen extends Fragment implements MealDetailsView {
         if (data != null && !data.isEmpty()) {
             adapter.setData(data);
         }
+    }
+
+    @Override
+    public void mealAddedToFav() {
+        Toast.makeText(requireContext(), "Meal Added to Fav", Toast.LENGTH_SHORT).show();
     }
 }

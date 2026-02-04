@@ -2,6 +2,7 @@ package com.example.mealplanner.presentation.homescreen.prsenter;
 
 
 
+import android.content.Context;
 import android.util.Log;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -24,8 +25,8 @@ public class HomePresenterIMP implements HomePresenter {
     private MealRepository repository;
     private MealView view;
 
-    public HomePresenterIMP(HomeScreen homeScreen) {
-        repository = new MealRepository();
+    public HomePresenterIMP(HomeScreen homeScreen, Context context) {
+        repository = new MealRepository(context);
         view = homeScreen;
     }
 

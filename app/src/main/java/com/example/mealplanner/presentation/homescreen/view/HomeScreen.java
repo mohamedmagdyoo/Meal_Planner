@@ -31,7 +31,7 @@ import com.example.mealplanner.presentation.homescreen.prsenter.HomePresenterIMP
 
 import java.util.List;
 
-public class HomeScreen extends Fragment implements MealView ,OnClickOnMealItem {
+public class HomeScreen extends Fragment implements MealView, OnClickOnMealItem {
 
     private RecyclerView recyclerView;
     private MealAdapter adapter;
@@ -62,7 +62,7 @@ public class HomeScreen extends Fragment implements MealView ,OnClickOnMealItem 
         adapter = new MealAdapter(this);
         recyclerView.setAdapter(adapter);
 
-        presenter = new HomePresenterIMP(this);
+        presenter = new HomePresenterIMP(this,requireContext().getApplicationContext());
         presenter.getAllMeals();
         presenter.getRandomMeal();
     }
@@ -76,6 +76,8 @@ public class HomeScreen extends Fragment implements MealView ,OnClickOnMealItem 
     public void setRandomMeal(MealDto randomMeal) {
         this.randomMeal = randomMeal;
 
+
+        //koko
         Glide.with(requireContext())
                 .load(randomMeal.getMealImage())
                 .centerCrop()

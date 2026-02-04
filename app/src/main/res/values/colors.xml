@@ -5,4 +5,6 @@
     <color name="orange_base">#E95322</color>
     <color name="yellow_base">#F5CB58</color>
     <color name="yellow_base2">#F3E9B5</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#01BC01</color>
 </resources>
