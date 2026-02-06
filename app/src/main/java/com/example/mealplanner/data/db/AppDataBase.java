@@ -9,7 +9,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.mealplanner.data.meal.datasourc.local.MealDAO;
-import com.example.mealplanner.data.meal.model.Meal;
+import com.example.mealplanner.data.meal.model.meal.Meal;
 
 @Database(entities = {Meal.class},version = 1)
 public abstract class AppDataBase extends RoomDatabase {

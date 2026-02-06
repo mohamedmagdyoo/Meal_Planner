@@ -8,13 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mealplanner.R;
-import com.example.mealplanner.data.meal.model.Meal;
-import com.example.mealplanner.data.meal.model.MealDto;
+import com.example.mealplanner.data.meal.model.meal.Meal;
 
 import java.util.List;
 
@@ -43,7 +41,6 @@ public class FavMealAdapter extends RecyclerView.Adapter<FavMealAdapter.CardHold
     public void setData(List<Meal> data) {
 
         this.data = data;
-//        Log.d("asd -->", "setData: " + this.data.getFirst().getMealName());
         notifyDataSetChanged();
 
     }
@@ -62,8 +59,8 @@ public class FavMealAdapter extends RecyclerView.Adapter<FavMealAdapter.CardHold
 
         public CardHolder(@NonNull View itemView) {
             super(itemView);
-            favImage = itemView.findViewById(R.id.fav_meal_image);
-            favMealName = itemView.findViewById(R.id.fav_meal_name);
+            favImage = itemView.findViewById(R.id.search_card_image);
+            favMealName = itemView.findViewById(R.id.search_card_name);
             trashBtn = itemView.findViewById(R.id.trash_fav_meal_btn);
         }
 

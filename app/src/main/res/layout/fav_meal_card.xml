@@ -20,7 +20,7 @@
         android:background="@color/orange_base">
 
         <ImageView
-            android:id="@+id/fav_meal_image"
+            android:id="@+id/search_card_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
@@ -34,7 +34,7 @@
             tools:src="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/fav_meal_name"
+            android:id="@+id/search_card_name"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="16dp"
@@ -45,7 +45,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/trash_fav_meal_btn"
-            app:layout_constraintStart_toEndOf="@+id/fav_meal_image"
+            app:layout_constraintStart_toEndOf="@+id/search_card_image"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Meal Name" />
 
@@ -60,9 +60,9 @@
             android:id="@+id/trash_fav_meal_btn"
             android:layout_width="60dp"
             android:layout_height="30dp"
-            app:layout_constraintBottom_toBottomOf="@+id/fav_meal_name"
+            app:layout_constraintBottom_toBottomOf="@+id/search_card_name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/fav_meal_name"
+            app:layout_constraintTop_toTopOf="@+id/search_card_name"
             app:srcCompat="@drawable/trash_icon" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

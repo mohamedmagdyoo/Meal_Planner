@@ -5,10 +5,9 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 
 import com.example.mealplanner.data.db.AppDataBase;
-import com.example.mealplanner.data.meal.model.Meal;
+import com.example.mealplanner.data.meal.model.meal.Meal;
 
 import java.util.List;
-import java.util.logging.Handler;
 
 public class MealLocalDataSource {
     private MealDAO mealDAO;

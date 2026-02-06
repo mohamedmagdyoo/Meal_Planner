@@ -1,4 +1,4 @@
-package com.example.mealplanner.data.meal.model;
+package com.example.mealplanner.data.meal.model.meal;
 
 import android.os.Parcel;
 import android.os.Parcelable;

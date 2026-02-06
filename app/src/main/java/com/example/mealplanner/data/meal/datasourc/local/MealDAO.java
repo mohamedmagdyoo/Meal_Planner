@@ -7,7 +7,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.example.mealplanner.data.meal.model.Meal;
+import com.example.mealplanner.data.meal.model.meal.Meal;
 
 import java.util.List;
 

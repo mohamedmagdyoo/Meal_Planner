@@ -1,15 +1,11 @@
 package com.example.mealplanner.presentation.mealDetailScreen.view;
 
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.media3.common.MediaItem;
-import androidx.media3.exoplayer.ExoPlayer;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,12 +15,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.mealplanner.R;
-import com.example.mealplanner.data.meal.model.Ingredient;
-import com.example.mealplanner.data.meal.model.MealDto;
+import com.example.mealplanner.data.meal.model.meal.Ingredient;
+import com.example.mealplanner.data.meal.model.meal.MealDto;
 import com.example.mealplanner.databinding.FragmentMealDetailsScreenBinding;
 import com.example.mealplanner.presentation.mealDetailScreen.presenter.MealDetailsPresenterIMP;
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 
 import java.util.List;
 

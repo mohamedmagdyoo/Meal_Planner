@@ -7,7 +7,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,27 +17,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.mealplanner.R;
-import com.example.mealplanner.data.meal.MealRepository;
-import com.example.mealplanner.data.meal.datasourc.remote.MealRemoteDataSource;
-import com.example.mealplanner.data.meal.datasourc.remote.RetrofitCallBack;
-import com.example.mealplanner.data.meal.model.MealDto;
-import com.example.mealplanner.presentation.homescreen.prsenter.HomePresenter;
+import com.example.mealplanner.data.meal.model.meal.MealDto;
 import com.example.mealplanner.presentation.homescreen.prsenter.HomePresenterIMP;
 
 import java.util.List;
 
 public class HomeScreen extends Fragment implements MealView, OnClickOnMealItem {
 
+    private HomePresenterIMP presenter;
     private RecyclerView recyclerView;
     private MealAdapter adapter;
     private MealDto randomMeal;
     private ImageView suggestedMealImage;
     private TextView suggestedMealName;
-    private HomePresenterIMP presenter;
     private NavDirections directions;
     private NavController controller;
 
@@ -54,6 +48,8 @@ public class HomeScreen extends Fragment implements MealView, OnClickOnMealItem 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        controller = NavHostFragment.findNavController(this);
+
         recyclerView = view.findViewById(R.id.meals_recycler_view);
         suggestedMealImage = view.findViewById(R.id.suggested_meal_image);
         suggestedMealName = view.findViewById(R.id.suggested_meal_name);
@@ -62,7 +58,7 @@ public class HomeScreen extends Fragment implements MealView, OnClickOnMealItem 
         adapter = new MealAdapter(this);
         recyclerView.setAdapter(adapter);
 
-        presenter = new HomePresenterIMP(this,requireContext().getApplicationContext());
+        presenter = new HomePresenterIMP(this, requireContext().getApplicationContext());
         presenter.getAllMeals();
         presenter.getRandomMeal();
     }
@@ -75,9 +71,7 @@ public class HomeScreen extends Fragment implements MealView, OnClickOnMealItem 
     @Override
     public void setRandomMeal(MealDto randomMeal) {
         this.randomMeal = randomMeal;
-
-
-        //koko
+        //koko understand the context
         Glide.with(requireContext())
                 .load(randomMeal.getMealImage())
                 .centerCrop()
@@ -89,10 +83,15 @@ public class HomeScreen extends Fragment implements MealView, OnClickOnMealItem 
     }
 
     @Override
+    public void noData() {
+        directions = HomeScreenDirections.actionHomeScreenToNoInternetScreen();
+        controller.navigate(directions);
+    }
+
+    @Override
     public void clickedOnMealItem(MealDto meal) {
         directions = HomeScreenDirections.actionHomeScreenToMealDetailsScreen(meal);
         Log.d("asd -->", "clickedOnMealItem: " + meal.getMealName());
-        controller = NavHostFragment.findNavController(this);
         controller.navigate(directions);
 
     }
