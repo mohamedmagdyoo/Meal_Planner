@@ -1,8 +1,16 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("androidx.navigation.safeargs")
+
 }
 
 android {
+
+
+    buildFeatures {
+        viewBinding = true
+    }
+
     namespace = "com.example.mealplanner"
     compileSdk {
         version = release(36)
@@ -26,19 +34,49 @@ android {
                 "proguard-rules.pro"
             )
         }
+
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
 }
+
 
 dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.fragment)
+    implementation(libs.androidx.cardview)
+    implementation(libs.androidx.recyclerview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation(libs.lottie)
+    implementation(libs.androidx.core.splashscreen)
+    implementation(libs.navigation.fragment.ktx)
+    implementation(libs.navigation.ui.ktx)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.glide)
+
+    //rx-java
+    implementation(libs.rxjava)
+    implementation(libs.rxandroid)
+    implementation(libs.rxjava3.retrofit.adapter)
+
+    //noinspection NewerVersionAvailable
+    implementation(libs.core)
+
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.exoplayer.dash)
+    implementation(libs.androidx.media3.ui)
+    implementation(libs.androidx.media3.ui.compose)
+
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+
 }
