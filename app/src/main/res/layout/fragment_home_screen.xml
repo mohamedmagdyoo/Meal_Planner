@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.homescreen.HomeScreen">
+    tools:context=".presentation.homescreen.view.HomeScreen">
 
     <ImageView
         android:id="@+id/imageView"
@@ -63,7 +63,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/yellow_base2">
+            android:background="@color/orange_base">
 
             <ImageView
                 android:id="@+id/suggested_meal_image"
@@ -74,22 +74,25 @@
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/burger_image"
                 tools:src="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/suggested_meal_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 android:fontFamily="@font/league_spartan_medium"
-                tools:text="Meal Name"
                 android:textSize="16sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/suggested_meal_image" />
+                app:layout_constraintTop_toBottomOf="@+id/suggested_meal_image"
+                tools:text="Meal Name" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline5"
@@ -113,12 +116,12 @@
         app:layout_constraintTop_toTopOf="@+id/guideline2" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/meals_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 

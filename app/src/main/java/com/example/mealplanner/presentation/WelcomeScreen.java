@@ -15,11 +15,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.mealplanner.R;
-import com.example.mealplanner.WelcomeScreenDirections;
 
 
 public class WelcomeScreen extends Fragment {
-    //    private Handler handler = new ;
     private NavDirections direction;
     private NavController controller;
 

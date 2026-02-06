@@ -1,0 +1,73 @@
+package com.example.mealplanner.presentation.favscreen.view;
+
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.example.mealplanner.data.meal.model.meal.Meal;
+import com.example.mealplanner.databinding.FragmentFavoriteBinding;
+import com.example.mealplanner.presentation.favscreen.presenter.FavMealPresenterIMP;
+
+import java.util.List;
+
+
+public class FavoriteFragment extends Fragment implements OnDeleteFromFav, FavoMealView {
+
+    private FragmentFavoriteBinding binding;
+    private FavMealAdapter adapter;
+    private FavMealPresenterIMP presenterIMP;
+    private NavDirections directions;
+    private NavController controller;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        binding = FragmentFavoriteBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        adapter = new FavMealAdapter(this);
+        presenterIMP = new FavMealPresenterIMP(this, getActivity().getApplicationContext());
+
+        presenterIMP.getFavMeals();
+        binding.favMealsContainer.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
+        binding.favMealsContainer.setAdapter(adapter);
+
+        controller = NavHostFragment.findNavController(this);
+
+    }
+
+    @Override
+    public void deleteFromFavMeals(Meal meal) {
+        presenterIMP.deleteFromFavMeals(meal);
+    }
+
+    @Override
+    public void setData(List<Meal> data) {
+        adapter.setData(data);
+    }
+
+
+    @Override
+    public void noDataInDB() {
+
+        directions = FavoriteFragmentDirections.actionFavoriteFragmentToNoDataScreen();
+        controller.navigate(directions);
+    }
+
+}
