@@ -2,6 +2,7 @@ package com.example.mealplanner.presentation.favscreen.presenter;
 
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.mealplanner.data.meal.MealRepository;
 import com.example.mealplanner.data.meal.model.meal.Meal;
@@ -21,18 +22,21 @@ public class FavMealPresenterIMP implements FavoMealPresenter {
     @Override
     public void getFavMeals() {
 
-        repository.getAllFavMeals().observe((FavoriteFragment)view,data ->{
-            if (! data.isEmpty())
-                view.setData(data);
-            else
-                view.noDataInDB();
+        repository.getAllFavMeals()
+                .subscribe(data -> {
+                            if (!data.isEmpty())
+                                view.setData(data);
+                            else
+                                view.noDataInDB();
+                        },
+                        throwable -> {
+                            Log.d("asd -->", "getFavMeals: E:" + throwable.getMessage());
+                        });
 
-        });
     }
 
     @Override
     public void deleteFromFavMeals(Meal meal) {
         repository.deleteMealFromFavMeals(meal);
-
     }
 }

@@ -19,6 +19,7 @@ import com.example.mealplanner.data.meal.model.meal.MealsResponseDto;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -83,8 +84,10 @@ public class MealRepository {
         local.deleteFromFavMeals(meal);
     }
 
-    public LiveData<List<Meal>> getAllFavMeals() {
-        return local.getAllFavMeals();
+    public Flowable<List<Meal>> getAllFavMeals() {
+        return local.getAllFavMeals()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
 

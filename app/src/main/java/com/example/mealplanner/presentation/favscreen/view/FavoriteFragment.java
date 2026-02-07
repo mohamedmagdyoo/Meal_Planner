@@ -62,7 +62,6 @@ public class FavoriteFragment extends Fragment implements OnDeleteFromFav, FavoM
         adapter.setData(data);
     }
 
-
     @Override
     public void noDataInDB() {
 

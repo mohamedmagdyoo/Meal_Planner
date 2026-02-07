@@ -9,6 +9,9 @@ import com.example.mealplanner.data.meal.model.meal.Meal;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Single;
+
 public class MealLocalDataSource {
     private MealDAO mealDAO;
     private AppDataBase room;
@@ -18,7 +21,7 @@ public class MealLocalDataSource {
         mealDAO = room.getMealDAO();
     }
 
-    public LiveData<List<Meal>> getAllFavMeals() {
+    public Flowable<List<Meal>> getAllFavMeals() {
         return mealDAO.getAllFavMeals();
     }
 

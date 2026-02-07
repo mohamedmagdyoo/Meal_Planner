@@ -11,11 +11,14 @@ import com.example.mealplanner.data.meal.model.meal.Meal;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Single;
+
 @Dao
 public interface MealDAO {
 
     @Query("Select * from MEAL")
-    LiveData<List<Meal>> getAllFavMeals();
+    Flowable<List<Meal>> getAllFavMeals();
     @Delete
     void deleteFromFavMeals(Meal Meal);
 

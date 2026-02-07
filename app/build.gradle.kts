@@ -77,7 +77,9 @@ dependencies {
     implementation(libs.androidx.media3.ui)
     implementation(libs.androidx.media3.ui.compose)
 
+    //room
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.rxjava3)
     annotationProcessor(libs.androidx.room.compiler)
 
     //Firebase
