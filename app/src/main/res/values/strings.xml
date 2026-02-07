@@ -14,4 +14,6 @@
     <string name="category">Category</string>
     <string name="ingredient">Ingredient</string>
     <string name="country">Country</string>
+    <string name="default_web_client_id">305195842916-qkbg23vg8p6j9g02kpq9i5gt2rkg17pv.apps.googleusercontent.com</string>
+
 </resources>

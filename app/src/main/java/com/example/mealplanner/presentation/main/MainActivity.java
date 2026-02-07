@@ -1,15 +1,20 @@
-package com.example.mealplanner;
+package com.example.mealplanner.presentation.main;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.NavDirections;
+import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
+import com.example.mealplanner.R;
 import com.example.mealplanner.databinding.ActivityMainBinding;
 
 
@@ -20,44 +25,54 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private NavHostFragment navHostFragment;
+    private NavController navController;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-
-        //Lottie
-        binding.lottieSplash.setProgress(0.5f);
-        binding.lottieSplash.setSpeed(105f);
-        binding.lottieSplash.playAnimation();
-
         navHostFragment =
                 (NavHostFragment) getSupportFragmentManager()
                         .findFragmentById(R.id.fragmentContainerView);
 
-        NavController navController = navHostFragment.getNavController();
+        navController = navHostFragment.getNavController();
 
         NavigationUI.setupWithNavController(
                 binding.bottomNavigationView,
                 navController
         );
 
-        handleBottomNavBar(navController);
+        handleBottomNavBar();
+        handelBackAction();
+        handleActionOnNavBarBottom();
+    }
 
-        binding.lottieSplash.addAnimatorListener(new AnimatorListenerAdapter() {
+    private void handelBackAction() {
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
-            public void onAnimationEnd(Animator animation) {
-                binding.lottieSplash.setVisibility(View.GONE);
+            public void handleOnBackPressed() {
+                Set<Integer> outersScreens = new HashSet<>();
+                outersScreens.add(R.id.homeScreen);
+                outersScreens.add(R.id.lunchScreen);
+                outersScreens.add(R.id.welcomeScreen);
+
+                NavDestination directions = navController.getCurrentDestination();
+
+                if (directions != null && outersScreens.contains(directions.getId())) {
+                    finish();
+                } else {
+                    navController.popBackStack();
+                }
+
             }
         });
     }
 
-    private void handleBottomNavBar(NavController navController) {
+    private void handleBottomNavBar() {
         Set<Integer> topLevelDestinations = new HashSet<>();
         topLevelDestinations.add(R.id.homeScreen);
         topLevelDestinations.add(R.id.searchFragment);
@@ -66,9 +81,7 @@ public class MainActivity extends AppCompatActivity {
         topLevelDestinations.add(R.id.profileFragment);
         topLevelDestinations.add(R.id.noInternetScreen);
         topLevelDestinations.add(R.id.noDataScreen);
-
         topLevelDestinations.add(R.id.searchMeal);
-        topLevelDestinations.add(R.id.mealDetailsScreen);
 
         navController.addOnDestinationChangedListener((controller, destination, args) -> {
             binding.bottomNavigationView.setVisibility(
@@ -77,6 +90,24 @@ public class MainActivity extends AppCompatActivity {
                             : View.GONE
 
             );
+        });
+    }
+
+    private void handleActionOnNavBarBottom() {
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+
+            if (navController.getCurrentDestination() != null && item.getItemId() == navController.getCurrentDestination().getId()) {
+                return false;
+            }
+
+            NavOptions options = new NavOptions.Builder()
+                    .setLaunchSingleTop(true)
+                    .setRestoreState(true)
+                    .setPopUpTo(R.id.homeScreen, false, true)
+                    .build();
+
+            navController.navigate(item.getItemId(), null, options);
+            return true;
         });
     }
 }

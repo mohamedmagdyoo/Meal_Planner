@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.mealplanner.R;
+import com.example.mealplanner.presentation.WelcomeScreenDirections;
 
 
 public class WelcomeScreen extends Fragment {

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/yellow_base"
-    tools:context=".presentation.LogInScreen">
+    tools:context=".presentation.login.view.LogInScreen">
 
     <TextView
         android:id="@+id/textView3"
@@ -25,11 +25,12 @@
 
     <ImageView
         android:id="@+id/back_btn_log_in_screen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="64dp"
         android:src="@drawable/back_btn"
-        app:layout_constraintStart_toStartOf="@+id/vertical_guid_line"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -115,10 +116,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/text_input_bk"
+            app:boxBackgroundMode="none"
             app:layout_constraintEnd_toStartOf="@+id/vertical_guid_line3"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/vertical_guid_line2"
-            app:boxBackgroundMode="none"
             app:layout_constraintTop_toBottomOf="@+id/textView6">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -135,9 +136,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:background="@drawable/text_input_bk"
+            app:boxBackgroundMode="none"
             app:layout_constraintEnd_toStartOf="@+id/vertical_guid_line3"
             app:layout_constraintStart_toStartOf="@+id/vertical_guid_line2"
-            app:boxBackgroundMode="none"
             app:layout_constraintTop_toBottomOf="@+id/textView7">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -160,7 +161,7 @@
             app:layout_constraintTop_toBottomOf="@+id/email_layout" />
 
         <Button
-            android:id="@+id/signup_btn"
+            android:id="@+id/signin_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -178,9 +179,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/or_log_in_with"
-            app:layout_constraintEnd_toEndOf="@+id/signup_btn"
-            app:layout_constraintStart_toStartOf="@+id/signup_btn"
-            app:layout_constraintTop_toBottomOf="@+id/signup_btn" />
+            app:layout_constraintEnd_toEndOf="@+id/signin_btn"
+            app:layout_constraintStart_toStartOf="@+id/signin_btn"
+            app:layout_constraintTop_toBottomOf="@+id/signin_btn" />
 
         <ImageView
             android:id="@+id/google_login_btn"
