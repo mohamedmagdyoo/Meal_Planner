@@ -38,7 +38,7 @@ public class ProfileFragment extends Fragment implements ProfileView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         controller = NavHostFragment.findNavController(this);
-        presenter = new ProfilePresenterIMP(this);
+        presenter = new ProfilePresenterIMP(this,requireActivity());
 
         binding.logOutBtn.setOnClickListener(v -> {
             presenter.logOut();

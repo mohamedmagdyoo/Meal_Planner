@@ -88,11 +88,15 @@ dependencies {
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
 
+
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+
     //google
-    implementation(platform("com.google.firebase:firebase-bom:34.9.0"))
     implementation("androidx.credentials:credentials:1.3.0")
     implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
+
     implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
+    implementation("com.github.bumptech.glide:glide:5.0.5")
 
 
 }

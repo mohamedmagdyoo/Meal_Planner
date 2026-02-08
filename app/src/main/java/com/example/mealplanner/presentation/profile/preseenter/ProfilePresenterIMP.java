@@ -1,21 +1,26 @@
 package com.example.mealplanner.presentation.profile.preseenter;
 
+import android.content.Context;
+
+
+import com.example.mealplanner.data.auth.dataSource.AuthRemotDataSource;
 import com.example.mealplanner.presentation.profile.view.ProfileFragment;
 import com.example.mealplanner.presentation.profile.view.ProfileView;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class ProfilePresenterIMP implements ProfilePresenter {
-    private FirebaseAuth auth;
+    private AuthRemotDataSource authRemotDataSource;
     private ProfileView view;
 
-    public ProfilePresenterIMP(ProfileFragment profileFragment) {
-        auth = FirebaseAuth.getInstance();
+
+    public ProfilePresenterIMP(ProfileFragment profileFragment, Context context) {
+        authRemotDataSource = new AuthRemotDataSource(context);
         view = profileFragment;
     }
 
     @Override
     public void logOut() {
-        auth.signOut();
+
+        authRemotDataSource.signOut();
         view.logOutDone();
     }
 }

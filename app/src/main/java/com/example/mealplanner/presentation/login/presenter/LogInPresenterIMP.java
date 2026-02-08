@@ -1,28 +1,44 @@
 package com.example.mealplanner.presentation.login.presenter;
 
+import android.content.Context;
+
+import androidx.core.content.ContextCompat;
+
+import com.example.mealplanner.data.auth.dataSource.AuthRemotDataSource;
+import com.example.mealplanner.data.auth.FirebaserResponse;
 import com.example.mealplanner.presentation.login.view.LogInScreen;
 import com.example.mealplanner.presentation.login.view.LogInView;
-import com.google.firebase.auth.FirebaseAuth;
+
+import com.google.firebase.auth.FirebaseUser;
+
+import io.reactivex.rxjava3.core.Single;
 
 public class LogInPresenterIMP implements LogInPresenter {
 
-    private FirebaseAuth auth;
+    private AuthRemotDataSource authRemotDataSource;
     private LogInView view;
 
-    public LogInPresenterIMP(LogInScreen logInScreen) {
-        auth = FirebaseAuth.getInstance();
+    public LogInPresenterIMP(LogInScreen logInScreen, Context context) {
+        authRemotDataSource = new AuthRemotDataSource(context);
         view = logInScreen;
     }
 
     @Override
     public void logInUser(String email, String pass) {
-        auth.signInWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                view.onSuccess(auth.getCurrentUser());
-            }else{
-                view.onFailed();
-            }
-        });
+        authRemotDataSource.login(email, pass).subscribe(
+                user -> view.onSuccess(user),
+                throwable -> view.onFailed(throwable.getMessage())
+        );
     }
+
+    @Override
+    public void logInUserWithGoogle(String idToken) {
+
+        authRemotDataSource.loginWithGoogle(idToken).subscribe(
+                user -> view.onSuccess(user),
+                throwable -> view.onFailed(throwable.getMessage())
+        );
+    }
+
 
 }

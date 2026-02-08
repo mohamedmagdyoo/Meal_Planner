@@ -42,7 +42,7 @@ public class SignupScreen extends Fragment implements SignUpView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         controller = NavHostFragment.findNavController(this);
-        presenter = new SignUpPresenterIMP(this);
+        presenter = new SignUpPresenterIMP(this,requireActivity());
 
         binding.signupBtn.setOnClickListener(view1 -> {
             getUserInfo();
