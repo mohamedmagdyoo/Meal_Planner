@@ -41,6 +41,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:checkable="true"
+            android:checked="true"
             android:text="@string/category"
 
             app:chipBackgroundColor="@color/orange_base" />
@@ -49,7 +51,6 @@
             android:id="@+id/ingredient_chip"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
             android:text="@string/ingredient"
 
@@ -75,5 +76,15 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/no_connection_lottie_cont"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@color/white2"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/no_connection_lottie" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

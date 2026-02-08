@@ -47,7 +47,6 @@
             android:id="@+id/action_welcomeScreen_to_bottom_nav_graph"
             app:destination="@id/bottom_nav_graph"
             app:launchSingleTop="true"
-            app:popUpTo="@id/welcomeScreen"
             app:popUpToInclusive="false" />
     </fragment>
     <include app:graph="@navigation/bottom_nav_graph" />

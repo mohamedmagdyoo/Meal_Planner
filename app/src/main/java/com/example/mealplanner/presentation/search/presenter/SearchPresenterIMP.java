@@ -32,9 +32,10 @@ public class SearchPresenterIMP implements SearchPresenter {
         repo.getCategorise()
                 .map(this::mapListOfCategoryToListOfItem)
                 .subscribe(item -> {
-                    data = item;
-                    searchView.setData(item, flag = "c");
-                });
+                            data = item;
+                            searchView.setData(item, flag = "c");
+                        },
+                        throwable -> handleError(throwable));
     }
 
     public void getAllCountries() {
@@ -43,7 +44,8 @@ public class SearchPresenterIMP implements SearchPresenter {
                 .subscribe(item -> {
                             data = item;
                             searchView.setData(item, flag = "a");
-                        }
+                        },
+                        throwable -> handleError(throwable)
                 );
     }
 
@@ -55,8 +57,13 @@ public class SearchPresenterIMP implements SearchPresenter {
                         item -> {
                             data = item;
                             searchView.setData(item, flag = "i");
-                        }
+                        },
+                        throwable -> handleError(throwable)
                 );
+    }
+
+    private void handleError(Throwable throwable) {
+        searchView.onError(throwable.getMessage());
     }
 
     private List<SearchItem> mapListOfCategoryToListOfItem(List<CategoryDto> listCategoryDto) {

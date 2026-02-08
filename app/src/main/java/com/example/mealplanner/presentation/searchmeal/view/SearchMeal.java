@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.mealplanner.R;
 import com.example.mealplanner.data.meal.model.meal.MealDto;
 import com.example.mealplanner.databinding.FragmentSearchMealBinding;
@@ -70,8 +71,7 @@ public class SearchMeal extends Fragment implements SearchMealView, OnItemClick 
     @Override
     public void setData(List<SearchItem> data) {
         if (data.isEmpty()){
-            directions = SearchMealDirections.actionSearchMealToNoDataScreen();
-            controller.navigate(directions);
+            binding.noDataLottieSearchScreen.setVisibility(LottieAnimationView.VISIBLE);
             return;
         }
         adapter.setData(data);

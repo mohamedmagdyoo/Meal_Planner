@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.example.mealplanner.R;
 import com.example.mealplanner.data.meal.model.meal.MealDto;
@@ -35,6 +36,8 @@ public class HomeScreen extends Fragment implements MealView, OnClickOnMealItem 
     private TextView suggestedMealName;
     private NavDirections directions;
     private NavController controller;
+    private LottieAnimationView lottieAnimationView;
+    private static boolean noInternetScreen = false;
 
 
     @Override
@@ -47,6 +50,8 @@ public class HomeScreen extends Fragment implements MealView, OnClickOnMealItem 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        lottieAnimationView = view.findViewById(R.id.no_connection_lottie_cont);
 
         controller = NavHostFragment.findNavController(this);
 
@@ -84,8 +89,11 @@ public class HomeScreen extends Fragment implements MealView, OnClickOnMealItem 
 
     @Override
     public void noData() {
-        directions = HomeScreenDirections.actionHomeScreenToNoInternetScreen();
-        controller.navigate(directions);
+        if(!noInternetScreen){
+            lottieAnimationView.setVisibility(LottieAnimationView.VISIBLE);
+        }
+//        directions = HomeScreenDirections.actionHomeScreenToNoInternetScreen();
+//        controller.navigate(directions);
     }
 
     @Override
