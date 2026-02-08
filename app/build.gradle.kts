@@ -98,5 +98,8 @@ dependencies {
     implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
     implementation("com.github.bumptech.glide:glide:5.0.5")
 
+    //video
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:13.0.0")
+
 
 }

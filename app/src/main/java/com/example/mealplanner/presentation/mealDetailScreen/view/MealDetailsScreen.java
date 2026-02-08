@@ -19,6 +19,8 @@ import com.example.mealplanner.data.meal.model.meal.Ingredient;
 import com.example.mealplanner.data.meal.model.meal.MealDto;
 import com.example.mealplanner.databinding.FragmentMealDetailsScreenBinding;
 import com.example.mealplanner.presentation.mealDetailScreen.presenter.MealDetailsPresenterIMP;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 
 import java.util.List;
 
@@ -53,9 +55,10 @@ public class MealDetailsScreen extends Fragment implements MealDetailsView {
                 .placeholder(R.drawable.meal_icon)
                 .into(binding.imageMealDetails);
 
-        binding.nestedScrollViewDetails.post(()->{
-            binding.nestedScrollViewDetails.scrollTo(0,0);
+        binding.nestedScrollViewDetails.post(() -> {
+            binding.nestedScrollViewDetails.scrollTo(0, 0);
         });
+
         binding.mealNameMDetails.setText(mealDto.getMealName());
         binding.typeMealNameDetails.setText(mealDto.getCategory());
         binding.countryMealNameDetails.setText(mealDto.getArea());
@@ -63,23 +66,27 @@ public class MealDetailsScreen extends Fragment implements MealDetailsView {
         adapter = new MealsAdapter();
         binding.recyclerViewIngredientsDetails.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         binding.recyclerViewIngredientsDetails.setAdapter(adapter);
-        presenterIMP = new MealDetailsPresenterIMP(this,requireContext().getApplicationContext());
+        presenterIMP = new MealDetailsPresenterIMP(this, requireContext().getApplicationContext());
 
         presenterIMP.getMealIngredients(mealDto);
 
-        binding.addToFavMeals.setOnClickListener(v->{
+        binding.addToFavMeals.setOnClickListener(v -> {
             presenterIMP.addToFavMeals(mealDto);
         });
 
-        //        getLifecycle().addObserver(binding.videoView);
-//        binding.videoView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
-//            @Override
-//            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
-//                String urlToLoad = mealDto.getYoutubeURL();
-//                String[] url = urlToLoad.split("watch?v=");
-//                youTubePlayer.loadVideo(url[1], 0);
-//            }
-//        });
+        getLifecycle().addObserver(binding.youtubePlayer);
+        binding.youtubePlayer.addYouTubePlayerListener(
+                new AbstractYouTubePlayerListener() {
+                    @Override
+                    public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                        String id = mealDto.getYoutubeURL().
+                                substring(mealDto.getYoutubeURL().indexOf("=") + 1);
+
+                        youTubePlayer.cueVideo(id, 0);
+                    }
+                }
+        );
+
     }
 
     @Override
