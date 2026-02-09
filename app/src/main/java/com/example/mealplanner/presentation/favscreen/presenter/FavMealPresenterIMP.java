@@ -32,11 +32,22 @@ public class FavMealPresenterIMP implements FavoMealPresenter {
                         throwable -> {
                             Log.d("asd -->", "getFavMeals: E:" + throwable.getMessage());
                         });
-
     }
 
     @Override
     public void deleteFromFavMeals(Meal meal) {
         repository.deleteMealFromFavMeals(meal);
+    }
+
+    @Override
+    public void getMealByName(String mealName) {
+        repository.getMealByName(mealName)
+                .filter(list -> !list.isEmpty())
+                .map(list -> list.get(0))
+                .subscribe(
+                        mealDto ->{
+                            view.setMeal(mealDto);
+                        }
+                );
     }
 }

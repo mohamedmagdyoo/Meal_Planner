@@ -16,17 +16,20 @@ import android.view.ViewGroup;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.mealplanner.data.meal.model.meal.Meal;
+import com.example.mealplanner.data.meal.model.meal.MealDto;
 import com.example.mealplanner.databinding.FragmentFavoriteBinding;
 import com.example.mealplanner.presentation.favscreen.presenter.FavMealPresenterIMP;
 
 import java.util.List;
 
 
-public class FavoriteFragment extends Fragment implements OnDeleteFromFav, FavoMealView {
+public class FavoriteFragment extends Fragment implements OnFavMealsAdapterCallBack, FavoMealView {
 
     private FragmentFavoriteBinding binding;
     private FavMealAdapter adapter;
     private FavMealPresenterIMP presenterIMP;
+    private NavDirections directions;
+    private NavController controller;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,12 +50,20 @@ public class FavoriteFragment extends Fragment implements OnDeleteFromFav, FavoM
         binding.favMealsContainer.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false));
         binding.favMealsContainer.setAdapter(adapter);
 
+        //Controller
+        controller = NavHostFragment.findNavController(this);
+
 
     }
 
     @Override
-    public void deleteFromFavMeals(Meal meal) {
+    public void onDeleteFromFavMeals(Meal meal) {
         presenterIMP.deleteFromFavMeals(meal);
+    }
+
+    @Override
+    public void onItemViewClick(String mealName) {
+        presenterIMP.getMealByName(mealName);
     }
 
     @Override
@@ -63,6 +74,12 @@ public class FavoriteFragment extends Fragment implements OnDeleteFromFav, FavoM
     @Override
     public void noDataInDB() {
         binding.noDataLottieFavScreen.setVisibility(LottieAnimationView.VISIBLE);
+    }
+
+    @Override
+    public void setMeal(MealDto mealDTO) {
+        directions = FavoriteFragmentDirections.actionFavoriteFragmentToMealDetailsScreen(mealDTO);
+        controller.navigate(directions);
     }
 
 }

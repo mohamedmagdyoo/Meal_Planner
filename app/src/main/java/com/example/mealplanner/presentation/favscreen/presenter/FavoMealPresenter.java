@@ -6,4 +6,6 @@ public interface FavoMealPresenter {
     void getFavMeals();
 
     void deleteFromFavMeals(Meal meal);
+
+    void getMealByName(String mealName);
 }

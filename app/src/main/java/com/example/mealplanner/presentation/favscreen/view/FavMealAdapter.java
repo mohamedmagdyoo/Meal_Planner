@@ -18,7 +18,7 @@ import java.util.List;
 
 public class FavMealAdapter extends RecyclerView.Adapter<FavMealAdapter.CardHolder> {
 
-    private OnDeleteFromFav callBack;
+    private OnFavMealsAdapterCallBack callBack;
     private List<Meal> data;
 
     public FavMealAdapter(FavoriteFragment favoriteFragment) {
@@ -48,7 +48,7 @@ public class FavMealAdapter extends RecyclerView.Adapter<FavMealAdapter.CardHold
     @Override
     public int getItemCount() {
 
-        return data == null? 0 : data.size();
+        return data == null ? 0 : data.size();
     }
 
     public class CardHolder extends RecyclerView.ViewHolder {
@@ -65,17 +65,17 @@ public class FavMealAdapter extends RecyclerView.Adapter<FavMealAdapter.CardHold
         }
 
         public void bind(Meal mealDto) {
-            Glide.with(itemView.getContext())
-                    .load(mealDto.getMealImage())
-                    .centerCrop()
-                    .placeholder(R.drawable.meal_icon)
-                    .into(favImage);
+            Glide.with(itemView.getContext()).load(mealDto.getMealImage()).centerCrop().placeholder(R.drawable.meal_icon).into(favImage);
 
             Log.d("asd -->", "bind: meal name" + mealDto.getMealName());
             favMealName.setText(mealDto.getMealName());
 
             trashBtn.setOnClickListener(view -> {
-                callBack.deleteFromFavMeals(mealDto);
+                callBack.onDeleteFromFavMeals(mealDto);
+            });
+
+            itemView.setOnClickListener(v -> {
+                callBack.onItemViewClick(mealDto.getMealName());
             });
         }
     }
