@@ -17,6 +17,16 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/no_data_lottie" />
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/no_connection_lottie_cont"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white2"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        android:visibility="gone"
+        app:lottie_rawRes="@raw/no_connection_lottie" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

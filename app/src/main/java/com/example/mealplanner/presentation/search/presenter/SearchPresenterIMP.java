@@ -1,12 +1,11 @@
 package com.example.mealplanner.presentation.search.presenter;
 
 import android.content.Context;
-import android.util.Log;
 
-import com.example.mealplanner.data.meal.MealRepository;
-import com.example.mealplanner.data.meal.model.area.AreaDto;
-import com.example.mealplanner.data.meal.model.category.CategoryDto;
-import com.example.mealplanner.data.meal.model.ingredient.IngredientDto;
+import com.example.mealplanner.data.favMeals.MealRepository;
+import com.example.mealplanner.data.favMeals.model.area.AreaDto;
+import com.example.mealplanner.data.favMeals.model.category.CategoryDto;
+import com.example.mealplanner.data.favMeals.model.ingredient.IngredientDto;
 import com.example.mealplanner.presentation.search.view.SearchFragment;
 import com.example.mealplanner.presentation.search.view.SearchItem;
 import com.example.mealplanner.presentation.search.view.SearchView;

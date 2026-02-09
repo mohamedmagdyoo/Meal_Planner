@@ -8,8 +8,8 @@ import androidx.room.InvalidationTracker;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.example.mealplanner.data.meal.datasourc.local.MealDAO;
-import com.example.mealplanner.data.meal.model.meal.Meal;
+import com.example.mealplanner.data.favMeals.datasourc.local.MealDAO;
+import com.example.mealplanner.data.favMeals.model.meal.Meal;
 
 @Database(entities = {Meal.class},version = 1)
 public abstract class AppDataBase extends RoomDatabase {

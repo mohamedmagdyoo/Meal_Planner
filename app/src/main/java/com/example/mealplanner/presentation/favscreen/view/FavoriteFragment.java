@@ -15,8 +15,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.mealplanner.data.meal.model.meal.Meal;
-import com.example.mealplanner.data.meal.model.meal.MealDto;
+import com.example.mealplanner.data.favMeals.model.meal.Meal;
+import com.example.mealplanner.data.favMeals.model.meal.MealDto;
 import com.example.mealplanner.databinding.FragmentFavoriteBinding;
 import com.example.mealplanner.presentation.favscreen.presenter.FavMealPresenterIMP;
 
@@ -74,6 +74,11 @@ public class FavoriteFragment extends Fragment implements OnFavMealsAdapterCallB
     @Override
     public void noDataInDB() {
         binding.noDataLottieFavScreen.setVisibility(LottieAnimationView.VISIBLE);
+    }
+
+    @Override
+    public void noInternetError() {
+        binding.noConnectionLottieCont.setVisibility(LottieAnimationView.VISIBLE);
     }
 
     @Override

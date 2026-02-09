@@ -1,4 +1,4 @@
-package com.example.mealplanner.data.meal.model.meal;
+package com.example.mealplanner.data.favMeals.model.meal;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -79,6 +79,9 @@ public class Meal {
 
     public void setYoutubeURL(String youtubeURL) {
         this.youtubeURL = youtubeURL;
+    }
+
+    public Meal() {
     }
 
     public Meal(String mealId, String mealName, String category, String area, String instructions, String mealImage, String youtubeURL) {

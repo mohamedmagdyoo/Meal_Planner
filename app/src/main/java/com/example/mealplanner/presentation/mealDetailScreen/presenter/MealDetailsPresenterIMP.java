@@ -2,16 +2,14 @@ package com.example.mealplanner.presentation.mealDetailScreen.presenter;
 
 import android.content.Context;
 
-import com.example.mealplanner.data.meal.MealRepository;
-import com.example.mealplanner.data.meal.model.meal.GetIngredients;
-import com.example.mealplanner.data.meal.model.meal.Ingredient;
-import com.example.mealplanner.data.meal.model.meal.Meal;
-import com.example.mealplanner.data.meal.model.meal.MealDto;
+import com.example.mealplanner.data.favMeals.MealRepository;
+import com.example.mealplanner.data.favMeals.model.meal.GetIngredients;
+import com.example.mealplanner.data.favMeals.model.meal.Ingredient;
+import com.example.mealplanner.data.favMeals.model.meal.Meal;
+import com.example.mealplanner.data.favMeals.model.meal.MealDto;
 import com.example.mealplanner.presentation.mealDetailScreen.view.MealDetailsScreen;
 import com.example.mealplanner.presentation.mealDetailScreen.view.MealDetailsView;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class MealDetailsPresenterIMP implements MealDetailsPresenter {
@@ -42,6 +40,7 @@ public class MealDetailsPresenterIMP implements MealDetailsPresenter {
     @Override
     public void addToFavMeals(MealDto mealDto) {
         repo.addMealToFavMeals(mapToMeal(mealDto));
+        repo.addFavMealToFirestore(mapToMeal(mealDto));
         view.mealAddedToFav();
     }
 

@@ -1,20 +1,15 @@
-package com.example.mealplanner.data.meal;
+package com.example.mealplanner.data.favMeals;
 
 import android.content.Context;
 
-import androidx.lifecycle.LiveData;
-
-import com.example.mealplanner.data.meal.datasourc.local.MealLocalDataSource;
-import com.example.mealplanner.data.meal.datasourc.remote.MealRemoteDataSource;
-import com.example.mealplanner.data.meal.model.area.AreaDto;
-import com.example.mealplanner.data.meal.model.area.AreasResponse;
-import com.example.mealplanner.data.meal.model.category.CategoriesResponse;
-import com.example.mealplanner.data.meal.model.category.CategoryDto;
-import com.example.mealplanner.data.meal.model.ingredient.IngredientDto;
-import com.example.mealplanner.data.meal.model.ingredient.IngredientsResponse;
-import com.example.mealplanner.data.meal.model.meal.Meal;
-import com.example.mealplanner.data.meal.model.meal.MealDto;
-import com.example.mealplanner.data.meal.model.meal.MealsResponseDto;
+import com.example.mealplanner.data.favMeals.datasourc.local.MealLocalDataSource;
+import com.example.mealplanner.data.favMeals.datasourc.remote.MealRemoteDataSource;
+import com.example.mealplanner.data.favMeals.model.area.AreaDto;
+import com.example.mealplanner.data.favMeals.model.category.CategoryDto;
+import com.example.mealplanner.data.favMeals.model.ingredient.IngredientDto;
+import com.example.mealplanner.data.favMeals.model.meal.Meal;
+import com.example.mealplanner.data.favMeals.model.meal.MealDto;
+import com.example.mealplanner.data.favMeals.model.meal.MealsResponseDto;
 
 import java.util.List;
 
@@ -29,7 +24,7 @@ public class MealRepository {
 
     public MealRepository(Context context) {
         local = new MealLocalDataSource(context);
-        remote = new MealRemoteDataSource();
+        remote = new MealRemoteDataSource(context);
     }
 
     //Remote
@@ -71,6 +66,14 @@ public class MealRepository {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(obj -> obj.getMeals());
+    }
+
+    public void addFavMealToFirestore(Meal meal) {
+        remote.addFavMealToFirestore(meal);
+    }
+
+    public void deleteFavMealFromFirestore(String mealId) {
+        remote.deleteFavMealFromFirestore(mealId);
     }
 
 

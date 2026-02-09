@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mealplanner.R;
-import com.example.mealplanner.data.meal.model.meal.Meal;
+import com.example.mealplanner.data.favMeals.model.meal.Meal;
 
 import java.util.List;
 
@@ -65,7 +65,8 @@ public class FavMealAdapter extends RecyclerView.Adapter<FavMealAdapter.CardHold
         }
 
         public void bind(Meal mealDto) {
-            Glide.with(itemView.getContext()).load(mealDto.getMealImage()).centerCrop().placeholder(R.drawable.meal_icon).into(favImage);
+            Glide.with(itemView
+                    .getContext()).load(mealDto.getMealImage()).centerCrop().placeholder(R.drawable.meal_icon).into(favImage);
 
             Log.d("asd -->", "bind: meal name" + mealDto.getMealName());
             favMealName.setText(mealDto.getMealName());

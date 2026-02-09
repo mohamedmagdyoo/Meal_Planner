@@ -1,10 +1,10 @@
-package com.example.mealplanner.data.meal.datasourc.remote;
+package com.example.mealplanner.data.favMeals.datasourc.remote;
 
 
-import com.example.mealplanner.data.meal.model.area.AreasResponse;
-import com.example.mealplanner.data.meal.model.category.CategoriesResponse;
-import com.example.mealplanner.data.meal.model.ingredient.IngredientsResponse;
-import com.example.mealplanner.data.meal.model.meal.MealsResponseDto;
+import com.example.mealplanner.data.favMeals.model.area.AreasResponse;
+import com.example.mealplanner.data.favMeals.model.category.CategoriesResponse;
+import com.example.mealplanner.data.favMeals.model.ingredient.IngredientsResponse;
+import com.example.mealplanner.data.favMeals.model.meal.MealsResponseDto;
 
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.http.GET;
@@ -18,8 +18,6 @@ public interface MealApiService {
     Single<MealsResponseDto> getMealByName(
             @Query("s") String mealName
     );
-
-
 
     @GET("random.php")
     Single<MealsResponseDto> getRandomMeal();

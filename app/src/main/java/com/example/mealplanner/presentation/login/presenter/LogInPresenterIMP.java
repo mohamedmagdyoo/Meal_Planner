@@ -9,10 +9,6 @@ import com.example.mealplanner.data.auth.FirebaserResponse;
 import com.example.mealplanner.presentation.login.view.LogInScreen;
 import com.example.mealplanner.presentation.login.view.LogInView;
 
-import com.google.firebase.auth.FirebaseUser;
-
-import io.reactivex.rxjava3.core.Single;
-
 public class LogInPresenterIMP implements LogInPresenter {
 
     private AuthRemotDataSource authRemotDataSource;

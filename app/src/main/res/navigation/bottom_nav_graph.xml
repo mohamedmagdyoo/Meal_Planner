@@ -57,18 +57,8 @@
         tools:layout="@layout/fragment_meal_details_screen">
         <argument
             android:name="mealDetails"
-            app:argType="com.example.mealplanner.data.meal.model.meal.MealDto" />
+            app:argType="com.example.mealplanner.data.favMeals.model.meal.MealDto" />
     </fragment>
-    <fragment
-        android:id="@+id/noInternetScreen"
-        android:name="com.example.mealplanner.NoInternetScreen"
-        android:label="fragment_no_internet_screen"
-        tools:layout="@layout/fragment_no_internet_screen" />
-    <fragment
-        android:id="@+id/noDataScreen"
-        android:name="com.example.mealplanner.NoDataScreen"
-        android:label="fragment_no_data_screen"
-        tools:layout="@layout/fragment_no_data_screen" />
     <fragment
         android:id="@+id/searchMeal"
         android:name="com.example.mealplanner.presentation.searchmeal.view.SearchMeal"

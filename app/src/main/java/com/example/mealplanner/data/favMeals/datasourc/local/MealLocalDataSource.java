@@ -1,16 +1,13 @@
-package com.example.mealplanner.data.meal.datasourc.local;
+package com.example.mealplanner.data.favMeals.datasourc.local;
 
 import android.content.Context;
 
-import androidx.lifecycle.LiveData;
-
 import com.example.mealplanner.data.db.AppDataBase;
-import com.example.mealplanner.data.meal.model.meal.Meal;
+import com.example.mealplanner.data.favMeals.model.meal.Meal;
 
 import java.util.List;
 
 import io.reactivex.rxjava3.core.Flowable;
-import io.reactivex.rxjava3.core.Single;
 
 public class MealLocalDataSource {
     private MealDAO mealDAO;

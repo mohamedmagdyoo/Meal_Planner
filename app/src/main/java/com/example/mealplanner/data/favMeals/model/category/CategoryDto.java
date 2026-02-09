@@ -1,4 +1,4 @@
-package com.example.mealplanner.data.meal.model.category;
+package com.example.mealplanner.data.favMeals.model.category;
 
 public class CategoryDto {
 

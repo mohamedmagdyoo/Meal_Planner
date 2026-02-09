@@ -1,4 +1,4 @@
-package com.example.mealplanner.data.meal.model.meal;
+package com.example.mealplanner.data.favMeals.model.meal;
 
 public class Ingredient {
     private String name;

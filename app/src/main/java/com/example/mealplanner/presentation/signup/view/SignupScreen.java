@@ -1,5 +1,8 @@
 package com.example.mealplanner.presentation.signup.view;
 
+import static android.content.Context.MODE_PRIVATE;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +12,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,8 +74,20 @@ public class SignupScreen extends Fragment implements SignUpView {
 
     @Override
     public void onCreateNewAccountSuccess(FirebaseUser user) {
+        setUserInfo(user);
         directions = SignupScreenDirections.actionSignupScreenToWelcomeScreen();
         controller.navigate(directions);
+    }
+
+    public void setUserInfo(FirebaseUser userInfo) {
+        Log.d("asd -->", "setUserInfo: username= " + userInfo.getDisplayName());
+
+        SharedPreferences sharedPreferences =
+                requireActivity().getSharedPreferences("app_info",MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("userId",userInfo.getUid());
+        editor.apply();
     }
 
     @Override

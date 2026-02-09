@@ -79,8 +79,6 @@ public class MainActivity extends AppCompatActivity {
         topLevelDestinations.add(R.id.calendarFragment);
         topLevelDestinations.add(R.id.favoriteFragment);
         topLevelDestinations.add(R.id.profileFragment);
-        topLevelDestinations.add(R.id.noInternetScreen);
-        topLevelDestinations.add(R.id.noDataScreen);
         topLevelDestinations.add(R.id.searchMeal);
 
         navController.addOnDestinationChangedListener((controller, destination, args) -> {
