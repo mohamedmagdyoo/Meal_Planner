@@ -2,6 +2,8 @@ package com.example.mealplanner.presentation.mealDetailScreen.presenter;
 
 import android.content.Context;
 
+import com.example.mealplanner.data.calendarMeals.CalendarMealRepo;
+import com.example.mealplanner.data.calendarMeals.model.CalendarMeal;
 import com.example.mealplanner.data.favMeals.MealRepository;
 import com.example.mealplanner.data.favMeals.model.meal.GetIngredients;
 import com.example.mealplanner.data.favMeals.model.meal.Ingredient;
@@ -16,9 +18,11 @@ public class MealDetailsPresenterIMP implements MealDetailsPresenter {
 
     private MealDetailsView view;
     private MealRepository repo;
+    private CalendarMealRepo calendarMealRepo;
 
     public MealDetailsPresenterIMP(MealDetailsScreen view, Context context) {
         repo = new MealRepository(context);
+        calendarMealRepo = new CalendarMealRepo(context);
         this.view = view;
     }
 
@@ -44,6 +48,17 @@ public class MealDetailsPresenterIMP implements MealDetailsPresenter {
         view.mealAddedToFav();
     }
 
+    @Override
+    public void addToCalendarMeals(CalendarMeal calendarMeal) {
+        // todo add to firestore
+        calendarMealRepo.addCalendarMeal(calendarMeal)
+                .subscribe(
+                        () -> view.mealAddedToFav(),
+                        throwable -> handleError(throwable)
+                );
+        calendarMealRepo.addCalendarMealToFireStore(calendarMeal);
+    }
+
     private Meal mapToMeal(MealDto mealDto) {
         Meal meal =
                 new Meal(mealDto.getMealId(),
@@ -52,5 +67,9 @@ public class MealDetailsPresenterIMP implements MealDetailsPresenter {
                         mealDto.getArea(), mealDto.getInstructions(), mealDto.getMealImage(), mealDto.getYoutubeURL());
 
         return meal;
+    }
+
+    void handleError(Throwable error) {
+        //todo handle error types
     }
 }

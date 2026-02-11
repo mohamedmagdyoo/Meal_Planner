@@ -2,10 +2,7 @@ package com.example.mealplanner.presentation.login.presenter;
 
 import android.content.Context;
 
-import androidx.core.content.ContextCompat;
-
 import com.example.mealplanner.data.auth.dataSource.AuthRemotDataSource;
-import com.example.mealplanner.data.auth.FirebaserResponse;
 import com.example.mealplanner.presentation.login.view.LogInScreen;
 import com.example.mealplanner.presentation.login.view.LogInView;
 
@@ -35,6 +32,5 @@ public class LogInPresenterIMP implements LogInPresenter {
                 throwable -> view.onFailed(throwable.getMessage())
         );
     }
-
 
 }

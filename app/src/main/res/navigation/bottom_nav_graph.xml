@@ -42,14 +42,25 @@
     </fragment>
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.example.mealplanner.presentation.CalendarFragment"
+        android:name="com.example.mealplanner.presentation.calendar.view.CalendarFragment"
         android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar" />
+        tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_calendarFragment_to_mealDetailsScreen"
+            app:destination="@id/mealDetailsScreen" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.mealplanner.presentation.profile.view.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
+    </fragment>
     <fragment
         android:id="@+id/mealDetailsScreen"
         android:name="com.example.mealplanner.presentation.mealDetailScreen.view.MealDetailsScreen"

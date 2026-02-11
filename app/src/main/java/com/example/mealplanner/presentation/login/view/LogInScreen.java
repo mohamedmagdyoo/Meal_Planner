@@ -126,6 +126,7 @@ public class LogInScreen extends Fragment implements LogInView {
 
     @Override
     public void onSuccess(FirebaseUser user) {
+        checkOnDataBase();
         setUserInfo(user);
         directions = LogInScreenDirections.actionLogInScreenToWelcomeScreen();
         controller.navigate(directions);
@@ -145,6 +146,10 @@ public class LogInScreen extends Fragment implements LogInView {
     @Override
     public void onFailed(String error) {
         Toast.makeText(requireContext(), "Failed Auth", Toast.LENGTH_SHORT).show();
+    }
+
+    void checkOnDataBase(){
+        
     }
 
 

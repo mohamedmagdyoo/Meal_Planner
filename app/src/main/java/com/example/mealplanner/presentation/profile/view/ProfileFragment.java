@@ -38,10 +38,20 @@ public class ProfileFragment extends Fragment implements ProfileView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         controller = NavHostFragment.findNavController(this);
-        presenter = new ProfilePresenterIMP(this,requireActivity());
+        presenter = new ProfilePresenterIMP(this, requireActivity());
 
         binding.logOutBtn.setOnClickListener(v -> {
             presenter.logOut();
+        });
+
+        binding.favMealsBtn.setOnClickListener(v -> {
+            directions = ProfileFragmentDirections.actionProfileFragmentToFavoriteFragment();
+            controller.navigate(directions);
+        });
+
+        binding.plannedMealsBtn.setOnClickListener(v -> {
+            directions = ProfileFragmentDirections.actionProfileFragmentToCalendarFragment();
+            controller.navigate(directions);
         });
     }
 
@@ -53,6 +63,6 @@ public class ProfileFragment extends Fragment implements ProfileView {
                 .setPopUpTo(R.id.bottom_nav_graph, true)
                 .build();
 
-        controller.navigate(R.id.lunchScreen,null,navOptions);
+        controller.navigate(R.id.lunchScreen, null, navOptions);
     }
 }

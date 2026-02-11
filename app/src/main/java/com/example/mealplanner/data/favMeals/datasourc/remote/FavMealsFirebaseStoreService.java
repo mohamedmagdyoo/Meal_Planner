@@ -28,7 +28,7 @@ public class FavMealsFirebaseStoreService {
                 .document(meal.getMealId())
                 .set(meal)
                 .addOnSuccessListener(s -> {
-                    Log.d("asd -->", "addFavMeal: succses");
+                    Log.d("asd -->", "addFavMeal: success");
 
                 })
                 .addOnFailureListener(e -> {

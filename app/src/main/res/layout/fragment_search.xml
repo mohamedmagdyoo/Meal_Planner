@@ -28,21 +28,25 @@
         android:id="@+id/chipGroup"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
         app:selectionRequired="true"
         app:singleSelection="true">
 
+
+
         <com.google.android.material.chip.Chip
             android:id="@+id/category_chip"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:checkable="true"
             android:checked="true"
+            android:gravity="center"
             android:text="@string/category"
 
             app:chipBackgroundColor="@color/orange_base" />
@@ -52,8 +56,8 @@
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ingredient"
 
+            android:text="@string/ingredient"
             app:chipBackgroundColor="@color/orange_base" />
 
         <com.google.android.material.chip.Chip
