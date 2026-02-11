@@ -23,6 +23,8 @@ public interface CalendarMealDAO {
 
     @Query("select * from  CalenderMeals where  day = :day")
     Observable<List<CalendarMeal>> getAllMealsInDay(long day);
-
-
+    @Query("delete from CalenderMeals")
+    Completable clearAll();
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    Completable insetAll(List<CalendarMeal> meals);
 }

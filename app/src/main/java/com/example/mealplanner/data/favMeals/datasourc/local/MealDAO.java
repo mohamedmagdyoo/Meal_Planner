@@ -10,6 +10,7 @@ import com.example.mealplanner.data.favMeals.model.meal.Meal;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
 
 @Dao
@@ -17,10 +18,16 @@ public interface MealDAO {
 
     @Query("Select * from MEAL")
     Flowable<List<Meal>> getAllFavMeals();
+
     @Delete
     void deleteFromFavMeals(Meal Meal);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void addToFavMeals(Meal meal);
 
+    @Query("delete from MEAL")
+    Completable clearAll();
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    Completable insertAll(List<Meal> meals);
 }

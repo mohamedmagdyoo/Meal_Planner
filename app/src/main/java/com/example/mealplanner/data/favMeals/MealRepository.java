@@ -1,6 +1,7 @@
 package com.example.mealplanner.data.favMeals;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.mealplanner.data.favMeals.datasourc.local.MealLocalDataSource;
 import com.example.mealplanner.data.favMeals.datasourc.remote.MealRemoteDataSource;
@@ -14,6 +15,7 @@ import com.example.mealplanner.data.favMeals.model.meal.MealsResponseDto;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -61,7 +63,8 @@ public class MealRepository {
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(obj -> obj.getIngredients());
     }
-    public Single<List<MealDto>> getMealByName(String mealName){
+
+    public Single<List<MealDto>> getMealByName(String mealName) {
         return remote.getMealByName(mealName)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -76,7 +79,11 @@ public class MealRepository {
         remote.deleteFavMealFromFirestore(mealId);
     }
 
-
+    public Single<List<Meal>> fetchFavMeals() {
+        return remote.fetchFavMeals()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 
     //Local
     public void addMealToFavMeals(Meal meal) {
@@ -89,6 +96,16 @@ public class MealRepository {
 
     public Flowable<List<Meal>> getAllFavMeals() {
         return local.getAllFavMeals()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public void clearAllTables() {
+            local.clearAllTables();
+    }
+
+    public Completable insertAll(List<Meal> meals) {
+        return local.insertAll(meals)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }

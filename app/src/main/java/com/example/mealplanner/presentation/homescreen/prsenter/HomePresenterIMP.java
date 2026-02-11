@@ -51,20 +51,18 @@ public class HomePresenterIMP implements HomePresenter {
 
                     @Override
                     public void onSuccess(@NonNull MealsResponseDto mealsResponseDto) {
-                        Log.d("asd -->", "onSuccess: data here (all meals)");
                         meals = mealsResponseDto.getMeals();
 
                         if (!meals.isEmpty()) {
                             view.setAllMeals(meals);
-                        }
-                        else{
+                        } else {
                             view.noData();
                         }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.d("asd -->", "onError: ");
+                        Log.d("asd -->", "onError: " + e.getMessage());
                         view.noData();
                     }
                 });
@@ -83,16 +81,12 @@ public class HomePresenterIMP implements HomePresenter {
 
                     @Override
                     public void onSuccess(@NonNull MealsResponseDto mealsResponseDto) {
-                        Log.d("asd -->", "onSuccess: data here (random meal)");
-
                         view.setRandomMeal(mealsResponseDto.getMeals().get(0));
-
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.d("asd -->", "onError: ");
-
+                        Log.d("asd -->", "onError: " + e.getMessage());
                     }
                 });
     }

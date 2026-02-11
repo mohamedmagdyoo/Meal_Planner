@@ -1,6 +1,7 @@
 package com.example.mealplanner.presentation.mealDetailScreen.presenter;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.mealplanner.data.calendarMeals.CalendarMealRepo;
 import com.example.mealplanner.data.calendarMeals.model.CalendarMeal;
@@ -11,7 +12,9 @@ import com.example.mealplanner.data.favMeals.model.meal.Meal;
 import com.example.mealplanner.data.favMeals.model.meal.MealDto;
 import com.example.mealplanner.presentation.mealDetailScreen.view.MealDetailsScreen;
 import com.example.mealplanner.presentation.mealDetailScreen.view.MealDetailsView;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import java.io.IOException;
 import java.util.List;
 
 public class MealDetailsPresenterIMP implements MealDetailsPresenter {
@@ -70,6 +73,14 @@ public class MealDetailsPresenterIMP implements MealDetailsPresenter {
     }
 
     void handleError(Throwable error) {
-        //todo handle error types
+        if (error instanceof InstantiationError) {
+            Log.e("FavoriteMeals", "InstantiationError: " + error.getMessage(), error);
+        } else if (error instanceof FirebaseFirestoreException) {
+            Log.e("FavoriteMeals", "Firestore error: " + error.getMessage(), error);
+        } else if (error instanceof IOException) {
+            Log.e("FavoriteMeals", "Network error: " + error.getMessage(), error);
+        } else {
+            Log.e("FavoriteMeals", "Unknown error: " + error.getMessage(), error);
+        }
     }
 }

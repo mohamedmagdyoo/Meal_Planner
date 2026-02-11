@@ -11,6 +11,7 @@ import java.util.List;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class CalendarMealRepo {
@@ -39,13 +40,22 @@ public class CalendarMealRepo {
         return localDataSource.getAllMealsInDay(date);
     }
 
+    public Completable insetAll(List<CalendarMeal> meals) {
+        return localDataSource.insertAll(meals);
+    }
+
     //remot
     public void addCalendarMealToFireStore(CalendarMeal calendarMeal) {
         calendarMealRemoteDataSource.addCalendarMeal(calendarMeal);
     }
 
-
     public void deleteCalendarMealFromFireStore(CalendarMeal calendarMeal) {
         calendarMealRemoteDataSource.deleteCalendarMeal(calendarMeal);
     }
+
+    public Single<List<CalendarMeal>> fetchAllCalendarMeals() {
+        return calendarMealRemoteDataSource.fetchAllCalendarMeals();
+    }
+
+
 }

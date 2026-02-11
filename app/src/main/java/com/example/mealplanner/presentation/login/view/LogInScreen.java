@@ -1,9 +1,6 @@
 package com.example.mealplanner.presentation.login.view;
 
-import static android.content.Context.MODE_PRIVATE;
-
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -57,7 +54,7 @@ public class LogInScreen extends Fragment implements LogInView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         controller = NavHostFragment.findNavController(this);
-        presenter = new LogInPresenterIMP(this, requireActivity());
+        presenter = new LogInPresenterIMP(this, requireContext(), requireActivity());
 
         handleLogIn();
         handleGoogleLogin();
@@ -126,31 +123,12 @@ public class LogInScreen extends Fragment implements LogInView {
 
     @Override
     public void onSuccess(FirebaseUser user) {
-        checkOnDataBase();
-        setUserInfo(user);
         directions = LogInScreenDirections.actionLogInScreenToWelcomeScreen();
         controller.navigate(directions);
-    }
-
-    public void setUserInfo(FirebaseUser userInfo) {
-        Log.d("asd -->", "setUserInfo: username= " + userInfo.getDisplayName());
-
-        SharedPreferences sharedPreferences =
-                requireActivity().getSharedPreferences("app_info",MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("userId",userInfo.getUid());
-        editor.apply();
     }
 
     @Override
     public void onFailed(String error) {
         Toast.makeText(requireContext(), "Failed Auth", Toast.LENGTH_SHORT).show();
     }
-
-    void checkOnDataBase(){
-        
-    }
-
-
 }

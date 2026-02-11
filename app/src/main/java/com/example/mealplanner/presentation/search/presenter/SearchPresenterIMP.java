@@ -97,7 +97,8 @@ public class SearchPresenterIMP implements SearchPresenter {
 
         if (data != null) {
             for (SearchItem val : data) {
-                if (val.getItemName().startsWith(query))
+                String valLowerCase = val.getItemName().toLowerCase();
+                if (valLowerCase.startsWith(query.toLowerCase()))
                     temp.add(val);
             }
         }

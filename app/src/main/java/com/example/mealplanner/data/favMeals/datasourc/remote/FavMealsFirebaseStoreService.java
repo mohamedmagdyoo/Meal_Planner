@@ -7,7 +7,13 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.mealplanner.data.favMeals.model.meal.Meal;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.rxjava3.core.Single;
 
 public class FavMealsFirebaseStoreService {
     private FirebaseFirestore firestore;
@@ -43,6 +49,27 @@ public class FavMealsFirebaseStoreService {
                 .document(mealId)
                 .delete();
         Log.d("asd -->", "deleteFavMeal: ");
+    }
+
+    Single<List<Meal>> fetchFavMeals() {
+        Single<List<Meal>> observable = Single.create(emitter -> {
+
+            List<Meal> data = new ArrayList<>();
+
+            firestore.collection("users")
+                    .document(userId)
+                    .collection("favMeals")
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+
+                        for (DocumentSnapshot val : queryDocumentSnapshots) {
+                            data.add(val.toObject(Meal.class));
+                        }
+                        emitter.onSuccess(data);
+                    });
+        });
+
+        return observable;
     }
 
 }

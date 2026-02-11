@@ -1,13 +1,17 @@
 package com.example.mealplanner.data.favMeals.datasourc.local;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.example.mealplanner.data.db.AppDataBase;
 import com.example.mealplanner.data.favMeals.model.meal.Meal;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class MealLocalDataSource {
     private MealDAO mealDAO;
@@ -36,4 +40,12 @@ public class MealLocalDataSource {
         }).start();
     }
 
+    public Completable insertAll(List<Meal> meals) {
+        return mealDAO.insertAll(meals);
+    }
+
+
+    public void clearAllTables() {
+        room.clearAllTables();
+    }
 }

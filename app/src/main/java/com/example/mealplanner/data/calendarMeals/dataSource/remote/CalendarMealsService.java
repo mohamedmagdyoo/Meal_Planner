@@ -7,9 +7,15 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.mealplanner.data.calendarMeals.model.CalendarMeal;
+import com.example.mealplanner.data.favMeals.model.meal.Meal;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
+import io.reactivex.rxjava3.core.Single;
 
 public class CalendarMealsService {
     private FirebaseFirestore firestore;
@@ -50,5 +56,26 @@ public class CalendarMealsService {
                 .addOnFailureListener(e -> {
                     Log.d("asd -->", "deleteCalendarMeal: failure");
                 });
+    }
+
+    Single<List<CalendarMeal>> fetchCalendarMeals() {
+        Single<List<CalendarMeal>> observable = Single.create(emitter -> {
+
+            List<CalendarMeal> data = new ArrayList<>();
+
+            firestore.collection("users")
+                    .document(userId)
+                    .collection("calendarMeals")
+                    .get()
+                    .addOnSuccessListener(queryDocumentSnapshots -> {
+
+                        for (DocumentSnapshot val : queryDocumentSnapshots){
+                            data.add(val.toObject(CalendarMeal.class));
+                        }
+                        emitter.onSuccess(data);
+                    });
+        });
+
+        return observable;
     }
 }

@@ -100,11 +100,12 @@ public class SearchFragment extends Fragment implements SearchView, OnItemClick 
 
     @Override
     public void setData(List<SearchItem> data, String flag) {
-        if (data == null || data.isEmpty()) {
-//            binding.noConnectionLottieCont.setVisibility(LottieAnimationView.VISIBLE);
-            Toast.makeText(requireContext(), "No Data", Toast.LENGTH_SHORT).show();
-
-        }
+        // todo delete it
+//        if (data == null || data.isEmpty()) {
+////            binding.noConnectionLottieCont.setVisibility(LottieAnimationView.VISIBLE);
+//            Toast.makeText(requireContext(), "No Data", Toast.LENGTH_SHORT).show();
+//
+//        }
         adapter.setData(data, flag);
     }
 

@@ -57,12 +57,9 @@ public class ProfileFragment extends Fragment implements ProfileView {
 
     @Override
     public void logOutDone() {
-        // todo dirictions , controller
-
         NavOptions navOptions = new NavOptions.Builder()
                 .setPopUpTo(R.id.bottom_nav_graph, true)
                 .build();
-
         controller.navigate(R.id.lunchScreen, null, navOptions);
     }
 }

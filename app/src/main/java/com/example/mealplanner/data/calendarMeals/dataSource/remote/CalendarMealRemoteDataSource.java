@@ -4,6 +4,10 @@ import android.content.Context;
 
 import com.example.mealplanner.data.calendarMeals.model.CalendarMeal;
 
+import java.util.List;
+
+import io.reactivex.rxjava3.core.Single;
+
 public class CalendarMealRemoteDataSource {
     private CalendarMealsService calendarMealsService;
 
@@ -18,5 +22,9 @@ public class CalendarMealRemoteDataSource {
 
     public void deleteCalendarMeal(CalendarMeal calendarMeal) {
         calendarMealsService.deleteCalendarMeal(calendarMeal);
+    }
+
+    public Single<List<CalendarMeal>> fetchAllCalendarMeals(){
+        return calendarMealsService.fetchCalendarMeals();
     }
 }

@@ -9,6 +9,8 @@ import com.example.mealplanner.data.favMeals.model.meal.Meal;
 import com.example.mealplanner.data.favMeals.model.meal.MealsResponseDto;
 import com.example.mealplanner.data.network.RetrofitClint;
 
+import java.util.List;
+
 import io.reactivex.rxjava3.core.Single;
 import retrofit2.Retrofit;
 
@@ -53,5 +55,8 @@ public class MealRemoteDataSource {
 
     public void deleteFavMealFromFirestore(String mealId) {
         firebaseFirestoreService.deleteFavMeal(mealId);
+    }
+    public Single<List<Meal>> fetchFavMeals(){
+        return firebaseFirestoreService.fetchFavMeals();
     }
 }

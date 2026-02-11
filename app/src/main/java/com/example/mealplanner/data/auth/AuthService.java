@@ -99,31 +99,3 @@ public class AuthService {
         );
     }
 }
-
-//    public void loginWithGoogle(String idToken, FirebaserResponse response) {
-//        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-//        auth.signInWithCredential(credential).addOnCompleteListener(task -> {
-//            if (task.isSuccessful()) {
-//                response.onSuccess(auth.getCurrentUser());
-//            } else {
-//                response.onFailed(task.getException());
-//            }
-//        });
-//    }
-
-
-//    public Single<FirebaseUser> register(String email, String password) {
-//
-//        Single<FirebaseUser> single = Single.create(emitter -> {
-//            auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-//                if (task.isSuccessful()) {
-//                    emitter.onSuccess(auth.getCurrentUser());
-//                } else {
-//                    emitter.onError(task.getException());
-//                }
-//            });
-//
-//        });
-//
-//        return single;
-//    }

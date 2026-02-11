@@ -8,6 +8,9 @@ import com.example.mealplanner.data.calendarMeals.model.CalendarMeal;
 import com.example.mealplanner.data.favMeals.MealRepository;
 import com.example.mealplanner.presentation.calendar.view.CalendarFragment;
 import com.example.mealplanner.presentation.calendar.view.CalendarView;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+
+import java.io.IOException;
 
 public class CalendarPresenterIMP implements CalendarPresenter {
     private CalendarMealRepo calendarMealRepo;
@@ -54,7 +57,15 @@ public class CalendarPresenterIMP implements CalendarPresenter {
     }
 
     void handleError(Throwable error) {
-        //todo handle error types
-        Log.d("asd -->", "handleError C.M: " + error.getMessage());
+        if (error instanceof InstantiationError) {
+            Log.e("FavoriteMeals", "InstantiationError: " + error.getMessage(), error);
+        } else if (error instanceof FirebaseFirestoreException) {
+            Log.e("FavoriteMeals", "Firestore error: " + error.getMessage(), error);
+        } else if (error instanceof IOException) {
+            Log.e("FavoriteMeals", "Network error: " + error.getMessage(), error);
+        } else {
+            Log.e("FavoriteMeals", "Unknown error: " + error.getMessage(), error);
+        }
     }
+
 }
