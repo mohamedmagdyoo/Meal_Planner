@@ -43,7 +43,7 @@ public class Splash extends Fragment {
         controller = NavHostFragment.findNavController(this);
 
         binding.lottieAnimationSplashScreen.setProgress(0.5f);
-        binding.lottieAnimationSplashScreen.setSpeed(105f);
+        binding.lottieAnimationSplashScreen.setSpeed(5f);
         binding.lottieAnimationSplashScreen.playAnimation();
 
         binding.lottieAnimationSplashScreen.addAnimatorListener(new AnimatorListenerAdapter() {
