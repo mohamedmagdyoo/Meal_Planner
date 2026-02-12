@@ -15,18 +15,7 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpTo="@id/homeScreen" />
-        <action
-            android:id="@+id/action_homeScreen_to_noInternetScreen"
-            app:destination="@id/noInternetScreen"
-
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpTo="@id/homeScreen"
-            app:popUpToInclusive="true" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -40,8 +29,7 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpTo="@id/searchFragment" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
@@ -49,26 +37,34 @@
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite">
         <action
-            android:id="@+id/action_favoriteFragment_to_noDataScreen"
-            app:destination="@id/noDataScreen"
-
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpTo="@id/favoriteFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_favoriteFragment_to_mealDetailsScreen"
+            app:destination="@id/mealDetailsScreen" />
     </fragment>
     <fragment
         android:id="@+id/calendarFragment"
-        android:name="com.example.mealplanner.presentation.CalendarFragment"
+        android:name="com.example.mealplanner.presentation.calendar.view.CalendarFragment"
         android:label="fragment_calendar"
-        tools:layout="@layout/fragment_calendar" />
+        tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_calendarFragment_to_mealDetailsScreen"
+            app:destination="@id/mealDetailsScreen" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.mealplanner.presentation.ProfileFragment"
+        android:name="com.example.mealplanner.presentation.profile.view.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment"
+            app:popUpTo="@id/profileFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_profileFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment"
+            app:popUpTo="@id/profileFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/mealDetailsScreen"
         android:name="com.example.mealplanner.presentation.mealDetailScreen.view.MealDetailsScreen"
@@ -76,18 +72,8 @@
         tools:layout="@layout/fragment_meal_details_screen">
         <argument
             android:name="mealDetails"
-            app:argType="com.example.mealplanner.data.meal.model.meal.MealDto" />
+            app:argType="com.example.mealplanner.data.favMeals.model.meal.MealDto" />
     </fragment>
-    <fragment
-        android:id="@+id/noInternetScreen"
-        android:name="com.example.mealplanner.NoInternetScreen"
-        android:label="fragment_no_internet_screen"
-        tools:layout="@layout/fragment_no_internet_screen" />
-    <fragment
-        android:id="@+id/noDataScreen"
-        android:name="com.example.mealplanner.NoDataScreen"
-        android:label="fragment_no_data_screen"
-        tools:layout="@layout/fragment_no_data_screen" />
     <fragment
         android:id="@+id/searchMeal"
         android:name="com.example.mealplanner.presentation.searchmeal.view.SearchMeal"
@@ -107,16 +93,6 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-        <action
-            android:id="@+id/action_searchMeal_to_noDataScreen"
-            app:destination="@id/noDataScreen"
-
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpTo="@id/searchMeal"
-            app:popUpToInclusive="true" />
     </fragment>
 
 

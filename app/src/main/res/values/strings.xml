@@ -9,9 +9,19 @@
     <string name="or_log_in_with">or log in with</string>
     <string name="or_sign_up_with">or sign up with</string>
     <string name="lazy_meals_for_a_cozy_day">Lazy meals for a cozy day:</string>
-    <string name="today_s_suggested_meal">Today\'s suggested meal:</string>
+    <string name="today_s_suggested_meal">Suggested meal:</string>
     <string name="instructions">Instructions:</string>
     <string name="category">Category</string>
     <string name="ingredient">Ingredient</string>
     <string name="country">Country</string>
+    <string name="default_web_client_id">305195842916-qkbg23vg8p6j9g02kpq9i5gt2rkg17pv.apps.googleusercontent.com</string>
+    <string name="planned_meals">Planned Meals</string>
+    <string name="log_out">Log Out</string>
+    <string name="favourite_meals">Favourite Meals</string>
+    <string name="profile">Profile</string>
+    <string name="search">Search</string>
+    <string name="welcome">Welcome</string>
+    <string name="home_screen">Home Screen</string>
+    <string name="guest_mode">Guest Mode</string>
+
 </resources>

@@ -11,9 +11,9 @@ import io.reactivex.rxjava3.core.SingleObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-import com.example.mealplanner.data.meal.MealRepository;
-import com.example.mealplanner.data.meal.model.meal.MealDto;
-import com.example.mealplanner.data.meal.model.meal.MealsResponseDto;
+import com.example.mealplanner.data.favMeals.MealRepository;
+import com.example.mealplanner.data.favMeals.model.meal.MealDto;
+import com.example.mealplanner.data.favMeals.model.meal.MealsResponseDto;
 import com.example.mealplanner.presentation.homescreen.view.HomeScreen;
 import com.example.mealplanner.presentation.homescreen.view.MealView;
 
@@ -51,20 +51,18 @@ public class HomePresenterIMP implements HomePresenter {
 
                     @Override
                     public void onSuccess(@NonNull MealsResponseDto mealsResponseDto) {
-                        Log.d("asd -->", "onSuccess: data here (all meals)");
                         meals = mealsResponseDto.getMeals();
 
                         if (!meals.isEmpty()) {
                             view.setAllMeals(meals);
-                        }
-                        else{
+                        } else {
                             view.noData();
                         }
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.d("asd -->", "onError: ");
+                        Log.d("asd -->", "onError: " + e.getMessage());
                         view.noData();
                     }
                 });
@@ -83,16 +81,12 @@ public class HomePresenterIMP implements HomePresenter {
 
                     @Override
                     public void onSuccess(@NonNull MealsResponseDto mealsResponseDto) {
-                        Log.d("asd -->", "onSuccess: data here (random meal)");
-
                         view.setRandomMeal(mealsResponseDto.getMeals().get(0));
-
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.d("asd -->", "onError: ");
-
+                        Log.d("asd -->", "onError: " + e.getMessage());
                     }
                 });
     }

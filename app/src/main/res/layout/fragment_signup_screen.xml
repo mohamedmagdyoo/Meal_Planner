@@ -5,7 +5,7 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 android:background="@color/yellow_base"
-tools:context=".presentation.SignupScreen">
+tools:context=".presentation.signup.view.SignupScreen">
 
     <TextView
         android:id="@+id/textView3"
@@ -23,14 +23,15 @@ tools:context=".presentation.SignupScreen">
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/back_btn_log_in_screen" />
 
-<ImageView
-    android:id="@+id/back_btn_log_in_screen"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="64dp"
-    android:src="@drawable/back_btn"
-    app:layout_constraintStart_toStartOf="@+id/vertical_guid_line"
-    app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/back_btn_log_in_screen"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/back_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 <androidx.constraintlayout.widget.Guideline
     android:id="@+id/vertical_guid_line"
@@ -181,25 +182,6 @@ tools:context=".presentation.SignupScreen">
         app:layout_constraintStart_toStartOf="@+id/vertical_guid_line2"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/or_sign_up_with"
-        app:layout_constraintEnd_toEndOf="@+id/signup_btn"
-        app:layout_constraintStart_toStartOf="@+id/signup_btn"
-        app:layout_constraintTop_toBottomOf="@+id/signup_btn" />
-
-    <ImageView
-        android:id="@+id/google_signup_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:src="@drawable/google_icon"
-        app:layout_constraintEnd_toEndOf="@+id/textView8"
-        app:layout_constraintStart_toStartOf="@+id/textView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

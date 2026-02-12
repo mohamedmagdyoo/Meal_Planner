@@ -3,10 +3,10 @@ package com.example.mealplanner.presentation.searchmeal.presenter;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.mealplanner.data.meal.MealRepository;
-import com.example.mealplanner.data.meal.model.meal.GetIngredients;
-import com.example.mealplanner.data.meal.model.meal.Ingredient;
-import com.example.mealplanner.data.meal.model.meal.MealDto;
+import com.example.mealplanner.data.favMeals.MealRepository;
+import com.example.mealplanner.data.favMeals.model.meal.GetIngredients;
+import com.example.mealplanner.data.favMeals.model.meal.Ingredient;
+import com.example.mealplanner.data.favMeals.model.meal.MealDto;
 import com.example.mealplanner.presentation.search.view.SearchItem;
 import com.example.mealplanner.presentation.searchmeal.view.SearchMeal;
 import com.example.mealplanner.presentation.searchmeal.view.SearchMealView;

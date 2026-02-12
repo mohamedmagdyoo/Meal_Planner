@@ -2,9 +2,10 @@ package com.example.mealplanner.presentation.favscreen.presenter;
 
 
 import android.content.Context;
+import android.util.Log;
 
-import com.example.mealplanner.data.meal.MealRepository;
-import com.example.mealplanner.data.meal.model.meal.Meal;
+import com.example.mealplanner.data.favMeals.MealRepository;
+import com.example.mealplanner.data.favMeals.model.meal.Meal;
 import com.example.mealplanner.presentation.favscreen.view.FavoriteFragment;
 import com.example.mealplanner.presentation.favscreen.view.FavoMealView;
 
@@ -21,18 +22,39 @@ public class FavMealPresenterIMP implements FavoMealPresenter {
     @Override
     public void getFavMeals() {
 
-        repository.getAllFavMeals().observe((FavoriteFragment)view,data ->{
-            if (! data.isEmpty())
-                view.setData(data);
-            else
-                view.noDataInDB();
-
-        });
+        repository.getAllFavMeals()
+                .subscribe(data -> {
+                            if (!data.isEmpty())
+                                view.setData(data);
+                            else
+                                view.noDataInDB();
+                        },
+                        throwable -> {
+                            Log.d("asd -->", "getFavMeals: E:" + throwable.getMessage());
+                        });
     }
 
     @Override
     public void deleteFromFavMeals(Meal meal) {
         repository.deleteMealFromFavMeals(meal);
+        repository.deleteFavMealFromFirestore(meal.getMealId());
 
     }
+
+    @Override
+    public void getMealByName(String mealName) {
+        repository.getMealByName(mealName)
+                .filter(list -> !list.isEmpty())
+                .map(list -> list.get(0))
+                .subscribe(
+                        mealDto -> {
+                            view.setMeal(mealDto);
+                        },
+                        error -> {
+                            view.noInternetError();
+                        }
+                );
+    }
+
+
 }

@@ -74,7 +74,6 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.CardHolder
             itemView.setOnClickListener((view)->{
                 event.onItemClick(item.getItemName(),flag);
             });
-
         }
     }
 }

@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.mealplanner.databinding.FragmentSearchBinding;
 import com.example.mealplanner.presentation.search.presenter.SearchPresenterIMP;
 import com.google.android.material.chip.Chip;
@@ -29,7 +30,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class SearchFragment extends Fragment implements SearchView,OnItemClick {
+public class SearchFragment extends Fragment implements SearchView, OnItemClick {
 
     private FragmentSearchBinding binding;
     private SearchPresenterIMP presenterIMP;
@@ -62,7 +63,7 @@ public class SearchFragment extends Fragment implements SearchView,OnItemClick {
                         LinearLayoutManager.VERTICAL, false));
         adapter = new SearchAdapter(this);
         binding.searchScreenContainer.setAdapter(adapter);
-
+        presenterIMP.getAllCategories();
     }
 
     void handelSearching() {
@@ -97,13 +98,21 @@ public class SearchFragment extends Fragment implements SearchView,OnItemClick {
     }
 
 
-
     @Override
     public void setData(List<SearchItem> data, String flag) {
+        // todo delete it
+//        if (data == null || data.isEmpty()) {
+////            binding.noConnectionLottieCont.setVisibility(LottieAnimationView.VISIBLE);
+//            Toast.makeText(requireContext(), "No Data", Toast.LENGTH_SHORT).show();
+//
+//        }
         adapter.setData(data, flag);
-
     }
 
+    @Override
+    public void onError(String message) {
+        binding.noConnectionLottieCont.setVisibility(LottieAnimationView.VISIBLE);
+    }
 
 
     private void putListenerOnSelectedChip() {
@@ -112,18 +121,18 @@ public class SearchFragment extends Fragment implements SearchView,OnItemClick {
             selectedChip = chipGroup.findViewById(checkedId);
 
             if ("Category".equals(selectedChip.getText().toString())) {
-                presenterIMP.getAllCategories();
+                binding.searchScreenTextInpuFirst.setText("");
                 binding.searchScreenTextInpuFirst.setHint("Search By Category");
+                presenterIMP.getAllCategories();
             } else if ("Country".equals(selectedChip.getText().toString())) {
-                presenterIMP.getAllCountries();
+                binding.searchScreenTextInpuFirst.setText("");
                 binding.searchScreenTextInpuFirst.setHint("Search By Country");
+                presenterIMP.getAllCountries();
 
             } else if ("Ingredient".equals(selectedChip.getText().toString())) {
-                presenterIMP.getAllIngredients();
+                binding.searchScreenTextInpuFirst.setText("");
                 binding.searchScreenTextInpuFirst.setHint("Search By Ingredient");
-
-            } else {
-                adapter.setData(null,"");
+                presenterIMP.getAllIngredients();
 
             }
         });
@@ -132,7 +141,7 @@ public class SearchFragment extends Fragment implements SearchView,OnItemClick {
 
     @Override
     public void onItemClick(String nameToFiltrate, String flag) {
-        directions = SearchFragmentDirections.actionSearchFragmentToSearchMeal(nameToFiltrate,flag);
+        directions = SearchFragmentDirections.actionSearchFragmentToSearchMeal(nameToFiltrate, flag);
         controller.navigate(directions);
     }
 }

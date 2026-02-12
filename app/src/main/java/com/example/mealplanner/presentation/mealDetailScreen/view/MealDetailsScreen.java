@@ -1,5 +1,6 @@
 package com.example.mealplanner.presentation.mealDetailScreen.view;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,11 +16,16 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.mealplanner.R;
-import com.example.mealplanner.data.meal.model.meal.Ingredient;
-import com.example.mealplanner.data.meal.model.meal.MealDto;
+import com.example.mealplanner.data.calendarMeals.model.CalendarMeal;
+import com.example.mealplanner.data.favMeals.model.meal.Ingredient;
+import com.example.mealplanner.data.favMeals.model.meal.MealDto;
 import com.example.mealplanner.databinding.FragmentMealDetailsScreenBinding;
+import com.example.mealplanner.presentation.mealDetailScreen.presenter.MealDetailsPresenter;
 import com.example.mealplanner.presentation.mealDetailScreen.presenter.MealDetailsPresenterIMP;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -28,7 +34,7 @@ public class MealDetailsScreen extends Fragment implements MealDetailsView {
     private MealDto mealDto;
     private FragmentMealDetailsScreenBinding binding;
     private MealsAdapter adapter;
-    private MealDetailsPresenterIMP presenterIMP;
+    private MealDetailsPresenter presenterIMP;
 
 
     @Override
@@ -53,9 +59,10 @@ public class MealDetailsScreen extends Fragment implements MealDetailsView {
                 .placeholder(R.drawable.meal_icon)
                 .into(binding.imageMealDetails);
 
-        binding.nestedScrollViewDetails.post(()->{
-            binding.nestedScrollViewDetails.scrollTo(0,0);
+        binding.nestedScrollViewDetails.post(() -> {
+            binding.nestedScrollViewDetails.scrollTo(0, 0);
         });
+
         binding.mealNameMDetails.setText(mealDto.getMealName());
         binding.typeMealNameDetails.setText(mealDto.getCategory());
         binding.countryMealNameDetails.setText(mealDto.getArea());
@@ -63,23 +70,61 @@ public class MealDetailsScreen extends Fragment implements MealDetailsView {
         adapter = new MealsAdapter();
         binding.recyclerViewIngredientsDetails.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
         binding.recyclerViewIngredientsDetails.setAdapter(adapter);
-        presenterIMP = new MealDetailsPresenterIMP(this,requireContext().getApplicationContext());
-
+        presenterIMP = new MealDetailsPresenterIMP(this, requireContext().getApplicationContext());
         presenterIMP.getMealIngredients(mealDto);
 
-        binding.addToFavMeals.setOnClickListener(v->{
+        getLifecycle().addObserver(binding.youtubePlayer);
+        binding.youtubePlayer.addYouTubePlayerListener(
+                new AbstractYouTubePlayerListener() {
+                    @Override
+                    public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                        String id = mealDto.getYoutubeURL().
+                                substring(mealDto.getYoutubeURL().indexOf("=") + 1);
+                        youTubePlayer.cueVideo(id, 0);
+                    }
+                }
+        );
+
+        //Fav Btn
+        binding.addToFavMeals.setOnClickListener(v -> {
             presenterIMP.addToFavMeals(mealDto);
         });
 
-        //        getLifecycle().addObserver(binding.videoView);
-//        binding.videoView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
-//            @Override
-//            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
-//                String urlToLoad = mealDto.getYoutubeURL();
-//                String[] url = urlToLoad.split("watch?v=");
-//                youTubePlayer.loadVideo(url[1], 0);
-//            }
-//        });
+        //Calendar Btn
+        binding.addToCalenderBtn.setOnClickListener(v2 -> {
+            showDatePicker();
+        });
+    }
+
+    private void showDatePicker() {
+
+        Calendar now = Calendar.getInstance();
+
+        DatePickerDialog dialog = new DatePickerDialog(
+                requireContext(),
+                (view, year, month, dayOfMonth) -> {
+
+                    Calendar cal = Calendar.getInstance();
+                    cal.set(year, month, dayOfMonth, 0, 0, 0);
+                    cal.set(Calendar.MILLISECOND, 0);
+
+                    long selectedDay = cal.getTimeInMillis();
+
+                    presenterIMP.addToCalendarMeals(mapToCalendarMeal(selectedDay));
+                },
+                now.get(Calendar.YEAR),
+                now.get(Calendar.MONTH),
+                now.get(Calendar.DAY_OF_MONTH)
+        );
+        dialog.getDatePicker().setMinDate(System.currentTimeMillis());
+
+        dialog.show();
+    }
+
+    private CalendarMeal mapToCalendarMeal(long date) {
+        //todo fethc the date here
+        return new CalendarMeal(mealDto.getMealId(), mealDto.getMealName(), mealDto.getMealImage(), date);
+
     }
 
     @Override
