@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".presentation.search.view.SearchFragment">
 
-
     <com.google.android.material.textfield.TextInputLayout
+
         android:id="@+id/textInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -19,9 +19,10 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/search_screen_text_inpu_first"
-            android:background="@drawable/text_input_bk"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/bk_search_bar"
+            android:drawableStart="@drawable/search_vec" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.chip.ChipGroup
@@ -35,34 +36,46 @@
         app:selectionRequired="true"
         app:singleSelection="true">
 
+
         <com.google.android.material.chip.Chip
             android:id="@+id/category_chip"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_weight="1"
+            android:checkable="true"
+            android:checked="true"
             android:gravity="center"
             android:text="@string/category"
-
+            android:textAlignment="center"
             app:chipBackgroundColor="@color/orange_base" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/ingredient_chip"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_weight="1"
             android:text="@string/ingredient"
-
+            android:textAlignment="center"
             app:chipBackgroundColor="@color/orange_base" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/country_chip"
             style="@style/Widget.MaterialComponents.Chip.Choice"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_weight="1"
+            android:gravity="center"
+
             android:text="@string/country"
+            android:textAlignment="center"
             app:chipBackgroundColor="@color/orange_base" />
+
+
     </com.google.android.material.chip.ChipGroup>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -75,5 +88,15 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chipGroup" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/no_connection_lottie_cont"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white2"
+        android:visibility="gone"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/no_connection_lottie" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

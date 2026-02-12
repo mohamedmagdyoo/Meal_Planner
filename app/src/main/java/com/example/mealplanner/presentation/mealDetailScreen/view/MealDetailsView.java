@@ -1,6 +1,6 @@
 package com.example.mealplanner.presentation.mealDetailScreen.view;
 
-import com.example.mealplanner.data.meal.model.meal.Ingredient;
+import com.example.mealplanner.data.favMeals.model.meal.Ingredient;
 
 import java.util.List;
 

@@ -1,12 +1,11 @@
 package com.example.mealplanner.presentation.search.presenter;
 
 import android.content.Context;
-import android.util.Log;
 
-import com.example.mealplanner.data.meal.MealRepository;
-import com.example.mealplanner.data.meal.model.area.AreaDto;
-import com.example.mealplanner.data.meal.model.category.CategoryDto;
-import com.example.mealplanner.data.meal.model.ingredient.IngredientDto;
+import com.example.mealplanner.data.favMeals.MealRepository;
+import com.example.mealplanner.data.favMeals.model.area.AreaDto;
+import com.example.mealplanner.data.favMeals.model.category.CategoryDto;
+import com.example.mealplanner.data.favMeals.model.ingredient.IngredientDto;
 import com.example.mealplanner.presentation.search.view.SearchFragment;
 import com.example.mealplanner.presentation.search.view.SearchItem;
 import com.example.mealplanner.presentation.search.view.SearchView;
@@ -32,9 +31,10 @@ public class SearchPresenterIMP implements SearchPresenter {
         repo.getCategorise()
                 .map(this::mapListOfCategoryToListOfItem)
                 .subscribe(item -> {
-                    data = item;
-                    searchView.setData(item, flag = "c");
-                });
+                            data = item;
+                            searchView.setData(item, flag = "c");
+                        },
+                        throwable -> handleError(throwable));
     }
 
     public void getAllCountries() {
@@ -43,7 +43,8 @@ public class SearchPresenterIMP implements SearchPresenter {
                 .subscribe(item -> {
                             data = item;
                             searchView.setData(item, flag = "a");
-                        }
+                        },
+                        throwable -> handleError(throwable)
                 );
     }
 
@@ -55,8 +56,13 @@ public class SearchPresenterIMP implements SearchPresenter {
                         item -> {
                             data = item;
                             searchView.setData(item, flag = "i");
-                        }
+                        },
+                        throwable -> handleError(throwable)
                 );
+    }
+
+    private void handleError(Throwable throwable) {
+        searchView.onError(throwable.getMessage());
     }
 
     private List<SearchItem> mapListOfCategoryToListOfItem(List<CategoryDto> listCategoryDto) {
@@ -91,7 +97,8 @@ public class SearchPresenterIMP implements SearchPresenter {
 
         if (data != null) {
             for (SearchItem val : data) {
-                if (val.getItemName().startsWith(query))
+                String valLowerCase = val.getItemName().toLowerCase();
+                if (valLowerCase.startsWith(query.toLowerCase()))
                     temp.add(val);
             }
         }

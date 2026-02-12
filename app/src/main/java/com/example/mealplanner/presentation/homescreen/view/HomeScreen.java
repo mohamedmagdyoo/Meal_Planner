@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
@@ -18,9 +19,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.bumptech.glide.Glide;
 import com.example.mealplanner.R;
-import com.example.mealplanner.data.meal.model.meal.MealDto;
+import com.example.mealplanner.data.favMeals.model.meal.MealDto;
 import com.example.mealplanner.presentation.homescreen.prsenter.HomePresenterIMP;
 
 import java.util.List;
@@ -35,6 +37,9 @@ public class HomeScreen extends Fragment implements MealView, OnClickOnMealItem 
     private TextView suggestedMealName;
     private NavDirections directions;
     private NavController controller;
+    private LottieAnimationView lottieAnimationView;
+    private static boolean noInternetScreen = false;
+    private CardView randoMealCardView;
 
 
     @Override
@@ -47,7 +52,8 @@ public class HomeScreen extends Fragment implements MealView, OnClickOnMealItem 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        randoMealCardView = view.findViewById(R.id.random_meal_card_view);
+        lottieAnimationView = view.findViewById(R.id.no_connection_lottie_cont);
         controller = NavHostFragment.findNavController(this);
 
         recyclerView = view.findViewById(R.id.meals_recycler_view);
@@ -61,6 +67,11 @@ public class HomeScreen extends Fragment implements MealView, OnClickOnMealItem 
         presenter = new HomePresenterIMP(this, requireContext().getApplicationContext());
         presenter.getAllMeals();
         presenter.getRandomMeal();
+
+        randoMealCardView.setOnClickListener(view1 ->{
+            directions = HomeScreenDirections.actionHomeScreenToMealDetailsScreen(randomMeal);
+            controller.navigate(directions);
+        });
     }
 
     @Override
@@ -71,21 +82,21 @@ public class HomeScreen extends Fragment implements MealView, OnClickOnMealItem 
     @Override
     public void setRandomMeal(MealDto randomMeal) {
         this.randomMeal = randomMeal;
-        //koko understand the context
         Glide.with(requireContext())
                 .load(randomMeal.getMealImage())
                 .centerCrop()
                 .placeholder(R.drawable.meal_icon)
                 .into(suggestedMealImage);
-
         suggestedMealName.setText(randomMeal.getMealName());
 
     }
 
     @Override
     public void noData() {
-        directions = HomeScreenDirections.actionHomeScreenToNoInternetScreen();
-        controller.navigate(directions);
+        if(!noInternetScreen){
+            lottieAnimationView.setVisibility(LottieAnimationView.VISIBLE);
+        }
+        //todo handle offline mode
     }
 
     @Override

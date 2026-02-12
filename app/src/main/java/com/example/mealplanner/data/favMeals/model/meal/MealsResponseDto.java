@@ -1,0 +1,16 @@
+package com.example.mealplanner.data.favMeals.model.meal;
+
+import java.util.List;
+
+public class MealsResponseDto {
+
+    private List<MealDto> meals;
+
+    public List<MealDto> getMeals() {
+        return meals;
+    }
+
+    public void setMeals(List<MealDto> meals) {
+        this.meals = meals;
+    }
+}

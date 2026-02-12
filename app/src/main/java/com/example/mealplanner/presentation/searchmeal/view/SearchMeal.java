@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.media3.exoplayer.source.ads.ServerSideAdInsertionMediaSource;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
@@ -17,13 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.mealplanner.R;
-import com.example.mealplanner.data.meal.model.meal.MealDto;
+import com.airbnb.lottie.LottieAnimationView;
+import com.example.mealplanner.data.favMeals.model.meal.MealDto;
 import com.example.mealplanner.databinding.FragmentSearchMealBinding;
 import com.example.mealplanner.presentation.search.view.OnItemClick;
-import com.example.mealplanner.presentation.search.view.SearchFragmentDirections;
 import com.example.mealplanner.presentation.search.view.SearchItem;
-import com.example.mealplanner.presentation.searchmeal.presenter.SearchMealPresenter;
 import com.example.mealplanner.presentation.searchmeal.presenter.SearchMealPresenterIMP;
 
 import java.util.List;
@@ -70,8 +67,7 @@ public class SearchMeal extends Fragment implements SearchMealView, OnItemClick 
     @Override
     public void setData(List<SearchItem> data) {
         if (data.isEmpty()){
-            directions = SearchMealDirections.actionSearchMealToNoDataScreen();
-            controller.navigate(directions);
+            binding.noDataLottieSearchScreen.setVisibility(LottieAnimationView.VISIBLE);
             return;
         }
         adapter.setData(data);

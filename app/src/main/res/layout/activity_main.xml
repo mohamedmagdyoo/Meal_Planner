@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".MainActivity">
+    tools:context=".presentation.main.MainActivity">
 
 
     <androidx.fragment.app.FragmentContainerView
@@ -19,8 +19,8 @@
         app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/main_nav_graph" />
+        app:navGraph="@navigation/main_nav_graph"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
@@ -32,22 +32,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu" />
-
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie_splash"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/orange_base"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:lottie_enableMergePathsForKitKatAndAbove="true"
-        app:lottie_rawRes="@raw/food_loading" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

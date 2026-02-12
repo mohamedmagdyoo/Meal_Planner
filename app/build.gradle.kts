@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     id("androidx.navigation.safeargs")
+    id("com.google.gms.google-services")
 
 }
 
@@ -76,7 +77,29 @@ dependencies {
     implementation(libs.androidx.media3.ui)
     implementation(libs.androidx.media3.ui.compose)
 
+    //room
     implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.rxjava3)
     annotationProcessor(libs.androidx.room.compiler)
+
+    //Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
+
+
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+
+    //google
+    implementation("androidx.credentials:credentials:1.3.0")
+    implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
+
+    implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
+    implementation("com.github.bumptech.glide:glide:5.0.5")
+
+    //video
+    implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:13.0.0")
+
 
 }
