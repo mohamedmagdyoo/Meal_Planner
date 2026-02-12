@@ -81,7 +81,6 @@ public class CalendarFragment extends Fragment implements CalendarView {
 
     @Override
     public void setData(List<CalendarMeal> data) {
-        //todo set the adapter
         calendarMealsAdapter.setData(data);
     }
 

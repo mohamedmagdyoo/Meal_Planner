@@ -1,12 +1,9 @@
 package com.example.mealplanner.presentation.login.presenter;
 
-import static android.content.Context.MODE_PRIVATE;
-
+import android.accounts.NetworkErrorException;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.mealplanner.data.auth.dataSource.AuthRemotDataSource;
@@ -14,7 +11,7 @@ import com.example.mealplanner.data.calendarMeals.CalendarMealRepo;
 import com.example.mealplanner.data.favMeals.MealRepository;
 import com.example.mealplanner.presentation.login.view.LogInScreen;
 import com.example.mealplanner.presentation.login.view.LogInView;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.io.IOException;
@@ -77,26 +74,27 @@ public class LogInPresenterIMP implements LogInPresenter {
     }
 
 
-    public void setUserInfo(@NonNull FirebaseUser user) {
-        Log.d("asd -->", "setUserInfo: username= " + user.getDisplayName());
-
-        SharedPreferences sharedPreferences =
-                activity.getSharedPreferences("app_info", MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("userId", user.getUid());
-        editor.apply();
-    }
-
     void handleError(Throwable error) {
-        if (error instanceof InstantiationError) {
-            Log.e("FavoriteMeals", "InstantiationError: " + error.getMessage(), error);
-        } else if (error instanceof FirebaseFirestoreException) {
-            Log.e("FavoriteMeals", "Firestore error: " + error.getMessage(), error);
-        } else if (error instanceof IOException) {
-            Log.e("FavoriteMeals", "Network error: " + error.getMessage(), error);
-        } else {
-            Log.e("FavoriteMeals", "Unknown error: " + error.getMessage(), error);
-        }
+        view.onFailed(error.getMessage());
     }
 }
+/*
+//    }
+//        if (error instanceof InstantiationError) {
+//            Log.e("FavoriteMeals", "InstantiationError: " + error.getMessage(), error);
+//        }else if(error instanceof FirebaseNetworkException){
+//            Log.e("FavoriteMeals", "Firestore error: " + error.getMessage(), error);
+//        }
+//        else if (error instanceof FirebaseFirestoreException) {
+//            Log.e("FavoriteMeals", "Firestore error: " + error.getMessage(), error);
+//        } else if (error instanceof IOException) {
+//            Log.e("FavoriteMeals", "IOException: " + error.getMessage(), error);
+//        } else if (error instanceof NetworkErrorException){
+//            Log.e("FavoriteMeals", "NetworkError error: " + error.getMessage(), error);
+//
+//        }
+//        else {
+//            Log.e("FavoriteMeals", "Unknown error: " + error.getMessage(), error);
+//        }
+//    }
+* */

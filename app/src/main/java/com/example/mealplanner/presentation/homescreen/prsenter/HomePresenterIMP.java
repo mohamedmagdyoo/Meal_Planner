@@ -16,7 +16,9 @@ import com.example.mealplanner.data.favMeals.model.meal.MealDto;
 import com.example.mealplanner.data.favMeals.model.meal.MealsResponseDto;
 import com.example.mealplanner.presentation.homescreen.view.HomeScreen;
 import com.example.mealplanner.presentation.homescreen.view.MealView;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -62,7 +64,7 @@ public class HomePresenterIMP implements HomePresenter {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.d("asd -->", "onError: " + e.getMessage());
+                        handleError(e);
                         view.noData();
                     }
                 });
@@ -86,8 +88,19 @@ public class HomePresenterIMP implements HomePresenter {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.d("asd -->", "onError: " + e.getMessage());
+                        handleError(e);
                     }
                 });
+    }
+    void handleError(Throwable error) {
+        if (error instanceof InstantiationError) {
+            Log.e("FavoriteMeals", "InstantiationError: " + error.getMessage(), error);
+        } else if (error instanceof FirebaseFirestoreException) {
+            Log.e("FavoriteMeals", "Firestore error: " + error.getMessage(), error);
+        } else if (error instanceof IOException) {
+            Log.e("FavoriteMeals", "Network error: " + error.getMessage(), error);
+        } else {
+            Log.e("FavoriteMeals", "Unknown error: " + error.getMessage(), error);
+        }
     }
 }

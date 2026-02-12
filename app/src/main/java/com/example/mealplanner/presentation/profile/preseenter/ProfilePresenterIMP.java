@@ -38,7 +38,7 @@ public class ProfilePresenterIMP implements ProfilePresenter {
 
                     SharedPreferences sp = profileFragment.requireActivity()
                             .getSharedPreferences("app_info", MODE_PRIVATE);
-                    sp.edit().putBoolean("is_guest", false).apply();
+                    sp.edit().putBoolean("is_guest", false).commit();
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

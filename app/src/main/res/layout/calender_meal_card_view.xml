@@ -57,8 +57,12 @@
 
         <ImageView
             android:id="@+id/trash_calender_meal_btn"
-            android:layout_width="60dp"
-            android:layout_height="30dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:scaleType="center"
             app:layout_constraintBottom_toBottomOf="@+id/calender_meal_card_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/calender_meal_card_name"

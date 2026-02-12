@@ -3,6 +3,7 @@ package com.example.mealplanner.presentation.mealDetailScreen.view;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -122,7 +123,6 @@ public class MealDetailsScreen extends Fragment implements MealDetailsView {
     }
 
     private CalendarMeal mapToCalendarMeal(long date) {
-        //todo fethc the date here
         return new CalendarMeal(mealDto.getMealId(), mealDto.getMealName(), mealDto.getMealImage(), date);
 
     }
@@ -137,5 +137,18 @@ public class MealDetailsScreen extends Fragment implements MealDetailsView {
     @Override
     public void mealAddedToFav() {
         Toast.makeText(requireContext(), "Meal Added to Fav", Toast.LENGTH_SHORT).show();
+        binding.addToFavMeals.setImageResource(R.drawable.love_red);
+    }
+
+    @Override
+    public void mealAddedToCalendar() {
+        Toast.makeText(requireContext(), "Meal Added to Calendar", Toast.LENGTH_SHORT).show();
+        binding.addToCalenderBtn.setImageResource(R.drawable.calendar_creen);
+    }
+
+    @Override
+    public void userIsGuest() {
+        Toast.makeText(requireContext(), "You are in the guest mode", Toast.LENGTH_SHORT).show();
+
     }
 }

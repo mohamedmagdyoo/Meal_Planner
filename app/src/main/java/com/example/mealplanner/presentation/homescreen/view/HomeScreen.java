@@ -1,10 +1,14 @@
 package com.example.mealplanner.presentation.homescreen.view;
 
+
+import static android.view.View.GONE;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
@@ -40,6 +44,7 @@ public class HomeScreen extends Fragment implements MealView, OnClickOnMealItem 
     private LottieAnimationView lottieAnimationView;
     private static boolean noInternetScreen = false;
     private CardView randoMealCardView;
+    private ConstraintLayout constraintLayout;
 
 
     @Override
@@ -55,6 +60,7 @@ public class HomeScreen extends Fragment implements MealView, OnClickOnMealItem 
         randoMealCardView = view.findViewById(R.id.random_meal_card_view);
         lottieAnimationView = view.findViewById(R.id.no_connection_lottie_cont);
         controller = NavHostFragment.findNavController(this);
+        constraintLayout = view.findViewById(R.id.random_meal_card_home_screen);
 
         recyclerView = view.findViewById(R.id.meals_recycler_view);
         suggestedMealImage = view.findViewById(R.id.suggested_meal_image);
@@ -94,9 +100,9 @@ public class HomeScreen extends Fragment implements MealView, OnClickOnMealItem 
     @Override
     public void noData() {
         if(!noInternetScreen){
+            constraintLayout.setVisibility(GONE);
             lottieAnimationView.setVisibility(LottieAnimationView.VISIBLE);
         }
-        //todo handle offline mode
     }
 
     @Override

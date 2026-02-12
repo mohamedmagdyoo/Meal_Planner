@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.mealplanner.data.favMeals.model.meal.MealDto;
@@ -22,7 +21,9 @@ import com.example.mealplanner.databinding.FragmentSearchMealBinding;
 import com.example.mealplanner.presentation.search.view.OnItemClick;
 import com.example.mealplanner.presentation.search.view.SearchItem;
 import com.example.mealplanner.presentation.searchmeal.presenter.SearchMealPresenterIMP;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import java.io.IOException;
 import java.util.List;
 
 public class SearchMeal extends Fragment implements SearchMealView, OnItemClick {
@@ -58,12 +59,9 @@ public class SearchMeal extends Fragment implements SearchMealView, OnItemClick 
         if (getArguments() != null) {
             key = SearchMealArgs.fromBundle(getArguments()).getKey();
             flag = SearchMealArgs.fromBundle(getArguments()).getFlag();
-            Log.d("asd -->", "SearchMEal: Key and flag:   " + key + flag);
             presenter.getAllMeals(key, flag);
         }
-
     }
-
     @Override
     public void setData(List<SearchItem> data) {
         if (data.isEmpty()){
@@ -84,16 +82,11 @@ public class SearchMeal extends Fragment implements SearchMealView, OnItemClick 
             }
         }
     }
-
     @Override
     public void onError() {
-        Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show(); // koko: remove it
     }
-
     @Override
     public void onItemClick(String mealId, String flag) {
-        //todo nav to meal with id
         presenter.getMealInfo(mealId);
-
     }
 }

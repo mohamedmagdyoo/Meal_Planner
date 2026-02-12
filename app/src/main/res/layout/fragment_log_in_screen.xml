@@ -103,7 +103,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="@string/email_or_mobile"
+            android:text="@string/email"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/vertical_guid_line3"
             app:layout_constraintHorizontal_bias="0.5"
@@ -126,7 +126,8 @@
                 android:id="@+id/email_input_log_in_screen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/email_or_mobile" />
+                android:inputType="textEmailAddress"
+                android:hint="@string/email" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -145,6 +146,8 @@
                 android:id="@+id/pass_input_login_screen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/pass_icon"
+                android:inputType="textPassword"
                 android:hint="Password" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -185,8 +188,8 @@
 
         <ImageView
             android:id="@+id/google_login_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
             android:layout_marginTop="12dp"
             android:src="@drawable/google_icon"
             app:layout_constraintEnd_toEndOf="@+id/textView8"

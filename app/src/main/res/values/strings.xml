@@ -5,7 +5,7 @@
     <string name="log_in">Log In</string>
     <string name="sign_up">Sign Up</string>
     <string name="login_message">Get excited! Start preparing your meals for the days ahead.</string>
-    <string name="email_or_mobile">Email or Mobile Number</string>
+    <string name="email">Email</string>
     <string name="or_log_in_with">or log in with</string>
     <string name="or_sign_up_with">or sign up with</string>
     <string name="lazy_meals_for_a_cozy_day">Lazy meals for a cozy day:</string>
@@ -23,5 +23,8 @@
     <string name="welcome">Welcome</string>
     <string name="home_screen">Home Screen</string>
     <string name="guest_mode">Guest Mode</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="ingredients">Ingredients:</string>
 
 </resources>

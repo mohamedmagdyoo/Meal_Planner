@@ -3,6 +3,7 @@ package com.example.mealplanner.presentation.mealDetailScreen.presenter;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.mealplanner.data.auth.dataSource.AuthRemotDataSource;
 import com.example.mealplanner.data.calendarMeals.CalendarMealRepo;
 import com.example.mealplanner.data.calendarMeals.model.CalendarMeal;
 import com.example.mealplanner.data.favMeals.MealRepository;
@@ -22,11 +23,13 @@ public class MealDetailsPresenterIMP implements MealDetailsPresenter {
     private MealDetailsView view;
     private MealRepository repo;
     private CalendarMealRepo calendarMealRepo;
+    private AuthRemotDataSource authRemotDataSource;
 
     public MealDetailsPresenterIMP(MealDetailsScreen view, Context context) {
         repo = new MealRepository(context);
         calendarMealRepo = new CalendarMealRepo(context);
         this.view = view;
+        authRemotDataSource = new AuthRemotDataSource(context);
     }
 
     private List<Ingredient> ingredientsList;
@@ -46,6 +49,10 @@ public class MealDetailsPresenterIMP implements MealDetailsPresenter {
 
     @Override
     public void addToFavMeals(MealDto mealDto) {
+        if (authRemotDataSource.isGuest()) {
+            view.userIsGuest();
+            return;
+        }
         repo.addMealToFavMeals(mapToMeal(mealDto));
         repo.addFavMealToFirestore(mapToMeal(mealDto));
         view.mealAddedToFav();
@@ -53,10 +60,14 @@ public class MealDetailsPresenterIMP implements MealDetailsPresenter {
 
     @Override
     public void addToCalendarMeals(CalendarMeal calendarMeal) {
-        // todo add to firestore
+        if (authRemotDataSource.isGuest()) {
+            view.userIsGuest();
+            return;
+        }
+
         calendarMealRepo.addCalendarMeal(calendarMeal)
                 .subscribe(
-                        () -> view.mealAddedToFav(),
+                        () -> view.mealAddedToCalendar(),
                         throwable -> handleError(throwable)
                 );
         calendarMealRepo.addCalendarMealToFireStore(calendarMeal);

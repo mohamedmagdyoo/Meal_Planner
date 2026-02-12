@@ -51,5 +51,10 @@ public class AuthRemotDataSource {
         sharedPreferences.edit().putBoolean("is_guest",true).apply();
     }
 
+    public boolean isGuest(){
+        return sharedPreferences.getBoolean("is_guest",false);
+    }
+
+
 
 }
