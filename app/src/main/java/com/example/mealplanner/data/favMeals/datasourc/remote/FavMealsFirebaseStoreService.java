@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.mealplanner.data.favMeals.model.meal.Meal;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -17,19 +18,18 @@ import io.reactivex.rxjava3.core.Single;
 
 public class FavMealsFirebaseStoreService {
     private FirebaseFirestore firestore;
-    private String userId;
+    private FirebaseAuth auth;
 
     public FavMealsFirebaseStoreService(Context context) {
         firestore = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
 
-        SharedPreferences sharedPreferences = context.getSharedPreferences("app_info", MODE_PRIVATE);
-        userId = sharedPreferences.getString("userId", null);
     }
 
     public void addFavMeal(Meal meal) {
-        Log.d("asd -->", "addFavMeal: userId" + userId);
+        Log.d("asd -->", "addFavMeal: userId" + auth.getUid());
         firestore.collection("users")
-                .document(userId)
+                .document(auth.getUid())
                 .collection("favMeals")
                 .document(meal.getMealId())
                 .set(meal)
@@ -44,7 +44,7 @@ public class FavMealsFirebaseStoreService {
 
     public void deleteFavMeal(String mealId) {
         firestore.collection("users")
-                .document(userId)
+                .document(auth.getUid())
                 .collection("favMeals")
                 .document(mealId)
                 .delete();
@@ -57,7 +57,7 @@ public class FavMealsFirebaseStoreService {
             List<Meal> data = new ArrayList<>();
 
             firestore.collection("users")
-                    .document(userId)
+                    .document(auth.getUid())
                     .collection("favMeals")
                     .get()
                     .addOnSuccessListener(queryDocumentSnapshots -> {

@@ -1,7 +1,6 @@
 package com.example.mealplanner.data.favMeals;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.example.mealplanner.data.favMeals.datasourc.local.MealLocalDataSource;
 import com.example.mealplanner.data.favMeals.datasourc.remote.MealRemoteDataSource;

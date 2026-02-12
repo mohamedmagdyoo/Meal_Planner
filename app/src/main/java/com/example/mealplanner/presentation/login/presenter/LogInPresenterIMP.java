@@ -11,7 +11,6 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.example.mealplanner.data.auth.dataSource.AuthRemotDataSource;
 import com.example.mealplanner.data.calendarMeals.CalendarMealRepo;
-import com.example.mealplanner.data.calendarMeals.dataSource.remote.CalendarMealRemoteDataSource;
 import com.example.mealplanner.data.favMeals.MealRepository;
 import com.example.mealplanner.presentation.login.view.LogInScreen;
 import com.example.mealplanner.presentation.login.view.LogInView;
@@ -44,24 +43,9 @@ public class LogInPresenterIMP implements LogInPresenter {
     public void logInUser(String email, String pass) {
         authRemotDataSource.login(email, pass).subscribe(
                 user -> {
-                    Completable.fromAction(() -> {
-                                setUserInfo(user);
-                                mealRepository.clearAllTables();
-                            })
-                            .subscribeOn(Schedulers.io())
-                            .andThen(mealRepository.fetchFavMeals())
-                            .flatMapCompletable(favMealsList -> mealRepository.insertAll(favMealsList))
-                            .andThen(calendarMealRepo.fetchAllCalendarMeals())
-                            .flatMapCompletable(meals -> calendarMealRepo.insetAll(meals))
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(
-                                    () -> view.onSuccess(user)
-                                    , this::handleError
-                            );
-                },
-                this::handleError
-        );
+                    handleDB();
+                    view.onSuccess(user);
+                }, this::handleError);
 
     }
 
@@ -70,29 +54,30 @@ public class LogInPresenterIMP implements LogInPresenter {
 
         authRemotDataSource.loginWithGoogle(idToken)
                 .subscribe(user -> {
-
-                    // Clear DB first
-                    Completable.fromAction(() -> {
-                                setUserInfo(user);
-                                mealRepository.clearAllTables();
-                            })
-                            .subscribeOn(Schedulers.io())
-                            .andThen(mealRepository.fetchFavMeals())  // Single<List<Meal>>
-                            .flatMapCompletable(favList ->
-                                    mealRepository.insertAll(favList)
-                            )
-                            .andThen(calendarMealRepo.fetchAllCalendarMeals())
-                            .flatMapCompletable(calList ->
-                                    calendarMealRepo.insetAll(calList)
-                            )
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(
-                                    () -> view.onSuccess(user),
-                                    this::handleError
-                            );
-
+                    handleDB();
+                    view.onSuccess(user);
                 }, this::handleError);
+    }
+
+    public void handleDB() {
+        Completable.fromAction(() -> {
+                    mealRepository.clearAllTables();
+                })
+                .doOnError(e -> Log.d("asd -->", "handleDB: error with clear data"))
+                .subscribeOn(Schedulers.io())
+                .andThen(mealRepository.fetchFavMeals())
+                .doOnError(e -> Log.d("asd -->", "handleDB: error with fetch fav meals"))
+                .flatMapCompletable(favList -> mealRepository.insertAll(favList))
+                .doOnError(e -> Log.d("asd -->", "handleDB: error with insert fav meals"))
+                .andThen(calendarMealRepo.fetchAllCalendarMeals())
+                .doOnError(e -> Log.d("asd -->", "handleDB: error with fetch calander meals"))
+                .flatMapCompletable(calList -> calendarMealRepo.insetAll(calList))
+                .doOnError(e -> Log.d("asd -->", "handleDB: error with insert calander meals"))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(() -> Log.d("asd -->", "handleDB: done"),
+                        this::handleError);
+
     }
 
 
@@ -118,5 +103,4 @@ public class LogInPresenterIMP implements LogInPresenter {
             Log.e("FavoriteMeals", "Unknown error: " + error.getMessage(), error);
         }
     }
-
 }

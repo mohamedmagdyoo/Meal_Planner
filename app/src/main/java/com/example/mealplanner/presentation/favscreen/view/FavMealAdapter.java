@@ -35,14 +35,12 @@ public class FavMealAdapter extends RecyclerView.Adapter<FavMealAdapter.CardHold
     @Override
     public void onBindViewHolder(@NonNull CardHolder holder, int position) {
         holder.bind(data.get(position));
-        Log.d("asd -->", "onBindViewHolder: " + data.get(position).getMealName());
+        Log.d("asd -->", "onBindViewHolder:   " + data.get(position).getMealName());
     }
 
     public void setData(List<Meal> data) {
-
         this.data = data;
         notifyDataSetChanged();
-
     }
 
     @Override
