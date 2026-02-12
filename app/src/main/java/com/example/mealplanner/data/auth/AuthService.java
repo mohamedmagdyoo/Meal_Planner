@@ -40,7 +40,6 @@ public class AuthService {
                 }
             });
         });
-
         return single;
     }
 

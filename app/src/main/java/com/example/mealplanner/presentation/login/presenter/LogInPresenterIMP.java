@@ -60,11 +60,7 @@ public class LogInPresenterIMP implements LogInPresenter {
     }
 
     public void handleDB() {
-        Completable.fromAction(() -> {
-                    mealRepository.clearAllTables();
-                })
-                .doOnError(e -> Log.d("asd -->", "handleDB: error with clear data"))
-                .subscribeOn(Schedulers.io())
+        Completable.fromAction(() -> mealRepository.fetchFavMeals())
                 .andThen(mealRepository.fetchFavMeals())
                 .doOnError(e -> Log.d("asd -->", "handleDB: error with fetch fav meals"))
                 .flatMapCompletable(favList -> mealRepository.insertAll(favList))

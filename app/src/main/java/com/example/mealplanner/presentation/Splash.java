@@ -1,4 +1,4 @@
-package com.example.mealplanner;
+package com.example.mealplanner.presentation;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mealplanner.R;
 import com.example.mealplanner.databinding.FragmentSplashBinding;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -55,7 +56,7 @@ public class Splash extends Fragment {
                             .build();
                     controller.navigate(R.id.welcomeScreen,null,options);
                 }else{
-                    direction = SplashDirections.actionSplashToLunchScreen();
+                    direction = com.example.mealplanner.presentation.SplashDirections.actionSplashToLunchScreen();
                     controller.navigate(direction);
                 }
             }

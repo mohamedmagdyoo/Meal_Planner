@@ -1,4 +1,4 @@
-package com.example.mealplanner.presentation.lunch;
+package com.example.mealplanner.presentation.lunch.view;
 
 import android.os.Bundle;
 
@@ -13,14 +13,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.mealplanner.R;
 import com.example.mealplanner.databinding.FragmentLunchScreenBinding;
-import com.google.firebase.analytics.FirebaseAnalytics;
+import com.example.mealplanner.presentation.lunch.presenter.LunchPresenter;
+import com.example.mealplanner.presentation.lunch.presenter.LunchPresenterIMP;
 
 public class LunchScreen extends Fragment {
     private FragmentLunchScreenBinding binding;
     private NavDirections directions;
     private NavController controller;
+    private LunchPresenter presenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,32 +34,32 @@ public class LunchScreen extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        presenter = new LunchPresenterIMP(requireContext());
         controller = NavHostFragment.findNavController(this);
 
 
         //Login btn
         binding.loginLunchScreenBtn.setOnClickListener(view1 -> {
-
-            // Firebase Analytics instance
-            FirebaseAnalytics analytics = FirebaseAnalytics.getInstance(requireContext());
-
-            analytics.setAnalyticsCollectionEnabled(true);
-            analytics.setUserProperty("debug_mode", "true");
-
-            Bundle bundle = new Bundle();
-            bundle.putString("test_key", "test_value");
-            analytics.logEvent("test_event", bundle);
-
-
-            view1.postDelayed(() -> {
-                directions = LunchScreenDirections.actionLunchScreenToLogInScreen();
-                controller.navigate(directions);
-            }, 500);
+            directions = LunchScreenDirections.actionLunchScreenToLogInScreen();
+            controller.navigate(directions);
         });
 
         binding.signupLunchScreenBtn.setOnClickListener(view1 -> {
             directions = LunchScreenDirections.actionLunchScreenToSignupScreen();
             controller.navigate(directions);
         });
+
+        binding.guestImage.setOnClickListener(v -> {
+            presenter.logInAsGuest();
+            directions = LunchScreenDirections.actionLunchScreenToWelcomeScreen();
+            controller.navigate(directions);
+        });
+
+        binding.guestTextView.setOnClickListener(v -> {
+            presenter.logInAsGuest();
+            directions = LunchScreenDirections.actionLunchScreenToWelcomeScreen();
+            controller.navigate(directions);
+        });
+
     }
 }

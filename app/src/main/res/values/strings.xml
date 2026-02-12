@@ -22,5 +22,6 @@
     <string name="search">Search</string>
     <string name="welcome">Welcome</string>
     <string name="home_screen">Home Screen</string>
+    <string name="guest_mode">Guest Mode</string>
 
 </resources>

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/lunchScreen"
-        android:name="com.example.mealplanner.presentation.lunch.LunchScreen"
+        android:name="com.example.mealplanner.presentation.lunch.view.LunchScreen"
         android:label="fragment_lunch_screen"
         tools:layout="@layout/fragment_lunch_screen" >
         <action
@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_lunchScreen_to_signupScreen"
             app:destination="@id/signupScreen" />
+        <action
+            android:id="@+id/action_lunchScreen_to_welcomeScreen"
+            app:destination="@id/welcomeScreen" />
     </fragment>
     <fragment
         android:id="@+id/logInScreen"
@@ -52,7 +55,7 @@
     <include app:graph="@navigation/bottom_nav_graph" />
     <fragment
         android:id="@+id/splash"
-        android:name="com.example.mealplanner.Splash"
+        android:name="com.example.mealplanner.presentation.Splash"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
