@@ -20,12 +20,14 @@
             android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- Ingredients -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
-            app:layout_constraintTop_toBottomOf="@id/image_meal_details">
+            app:layout_constraintTop_toBottomOf="@id/image_meal_details"
+            tools:layout_editor_absoluteX="-60dp">
 
             <TextView
                 android:id="@+id/meal_name_m_details"
@@ -75,37 +77,14 @@
                     android:text="Area" />
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/add_to_calender_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:background="@color/green"
-                app:layout_constraintBottom_toBottomOf="@+id/add_to_fav_meals"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintTop_toTopOf="@+id/add_to_fav_meals"
-                app:srcCompat="@drawable/calendar_vec" />
-
-            <ImageView
-                android:id="@+id/add_to_fav_meals"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="32dp"
-                android:background="@drawable/bk_red"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/add_to_calender_btn"
-                app:layout_constraintStart_toEndOf="@+id/linearLayout"
-                app:srcCompat="@drawable/fav_icon" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <!-- Ingredients -->
         <TextView
             android:id="@+id/textView17"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="Ingredients:"
+            android:text="@string/ingredients"
             android:textColor="@color/orange_base"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -116,7 +95,7 @@
             android:id="@+id/recycler_view_ingredients_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@id/textView17" />
 
         <TextView
@@ -160,6 +139,27 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+        <ImageView
+            android:id="@+id/add_to_fav_meals"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="125dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView17"
+            app:layout_constraintStart_toEndOf="@+id/textView17"
+            app:layout_constraintTop_toTopOf="@+id/textView17"
+            app:srcCompat="@drawable/fav_icon" />
+
+        <ImageView
+            android:id="@+id/add_to_calender_btn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="32dp"
+            android:background="@color/white2"
+            app:layout_constraintBottom_toBottomOf="@+id/add_to_fav_meals"
+            app:layout_constraintStart_toEndOf="@+id/add_to_fav_meals"
+            app:layout_constraintTop_toTopOf="@+id/add_to_fav_meals"
+            app:srcCompat="@drawable/calendar_vec" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>

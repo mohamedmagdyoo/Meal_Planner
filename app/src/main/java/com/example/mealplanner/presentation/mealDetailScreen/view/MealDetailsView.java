@@ -7,4 +7,6 @@ import java.util.List;
 public interface MealDetailsView {
     void setMealIngredients(List<Ingredient> data);
     void mealAddedToFav();
+    void mealAddedToCalendar();
+    void userIsGuest();
 }
